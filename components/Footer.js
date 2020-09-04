@@ -9,22 +9,36 @@ import { Facebook, Twitter, Instagram, Linkedin } from "react-feather";
 		min-height: 40vh;
 		background: ${s.black};
 		color: ${s.grey};
-		display: grid;
-		grid-template-columns: repeat(4, 1fr) auto;
-        padding: 2vh ${s.wPadding};
-        ul {
-            margin: 0;
-        }
-        button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 1vh 0;
-            padding: 0;
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-        }
+		padding: 2vh 0;
+		ul {
+			margin: 2vh 0;
+		}
+		button {
+			margin: 1vh 2vw;
+			padding: 0;
+			height: 50px;
+			width: 50px;
+			border-radius: 50%;
+		}
+		@media (max-width: ${s.tablet}) {
+			text-align: center;
+			li {
+				line-height: 200%;
+			}
+		}
+		@media (min-width: ${s.tablet}) {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr) auto;
+			padding: 2vh ${s.wPadding};
+			ul {
+				margin: 0;
+			}
+			button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
  `;
 
 export default function Footer() {
