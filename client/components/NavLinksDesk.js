@@ -17,7 +17,6 @@ export default function DeskNavLinks({ links }) {
 		<Links>
 			{links.map(({ component, text }) => {
 				const Component = findComponent(component);
-				console.log(component, Component);
 				return (
 					<li key={text}>
 						<Component color={s.red}>{text}</Component>

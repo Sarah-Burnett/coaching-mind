@@ -7,24 +7,24 @@ import findComponent from "../utilities/findComponent";
 
 export default function Index() {
 	const [json, setJson] = useState([]);
-	useEffect(() => fetch('/api/home', setJson), [])
+	useEffect(() => fetch("/api/home", setJson), []);
 	return (
 		<div>
 			<Head>
 				<title>Coaching Mind</title>
 			</Head>
 			<Nav />
-			{
-			json.length > 1 ? 
-				json.map(({ component, props }, index) => {
-					const Component = findComponent(component);
-					return (
-						<Component key={index} {...props}/>
-					)
-				})
-					: <div style={{height: "90vh"}}></div>
-				}
-			<Footer/>
+			<main>
+				{json.length > 1 ? (
+					json.map(({ component, props }, index) => {
+						const Component = findComponent(component);
+						return <Component key={index} {...props} />;
+					})
+				) : (
+					<div style={{ height: "90vh" }}></div>
+				)}
+			</main>
+			<Footer />
 		</div>
 	);
 }
