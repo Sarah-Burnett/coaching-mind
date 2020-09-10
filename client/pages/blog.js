@@ -1,53 +1,50 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
+import * as s from "../styles/variables";
 import Head from "next/head";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 import BlogCard from "../components/BlogCard";
-import BlogPost from "../components/BlogPost";
 
-const Error = styled.div`
-	height: 70vh;
-	color: red;
+const Main = styled.main`
+	padding: 1vh ${s.wPadding};
+	background: ${s.grey};
 `;
 
-const Loading = styled.div`
-	height: 70vh;
-`;
-
-export default function Blog() {
-	const [posts, setPosts] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
-	const addPosts = (post) => setPosts(posts);
-
-	const fetchPosts = async () => {
-		const res = await fetch("http://localhost:1337/posts"); //TODO: edit this to .env
-		const posts = await res.json();
-		setPosts(posts);
+const Wrapper = styled.div`
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	color: ${s.blue};
+	grid-template-columns: auto;
+	@media (min-width: ${s.desktop}) {
+		grid-template-columns: repeat(3, 1fr);
 	}
-	useEffect( () => {
-		try {
-			fetchPosts();
-		} catch {
-			setError(true);
-		}
-		setLoading(false);
-	}, []);
+`;
+
+export default function Blog({ posts }) {
 	return (
 		<div>
 			<Head>
-				<title>Coaching Mind</title>
+				<title>Blog</title>
 			</Head>
-			<Nav />
-			<main>
-				{error && <Error>No posts found. Please refresh to try again</Error>}
-				{loading && <Loading>Loading posts ...</Loading>}
-				{posts.map((post) => (
-					<BlogCard key={post.id} post={post}>{post.id}</BlogCard>
-				))}
-			</main>
-			<Footer />
+			<Main>
+				<h1>Blog</h1>
+				<Wrapper>
+					{posts.length > 1 ? (
+						posts.map((post) => (
+							<BlogCard key={post.id} item={post}>
+								{post.id}
+							</BlogCard>
+						))
+					) : (
+						<Error>No posts found. Please refresh to try again</Error>
+					)}
+				</Wrapper>
+			</Main>
 		</div>
 	);
 }
+
+Blog.getInitialProps = async () => {
+	const res = await fetch("http://localhost:1337/posts"); //TODO: edit this to .env
+	const posts = await res.json();
+	return { posts };
+};

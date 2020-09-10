@@ -69,35 +69,6 @@ export default (req, res) => {
 					color: "purple",
 				},
 			},
-		},
-		{
-			component: "ThreeGrid",
-			props: {
-				text: {
-					heading: "Find out more on our Blog",
-					grid: [
-						{
-							title: "Mindful learning in schools",
-							img: "https://plchldr.co/i/300x300",
-							date: "28 Aug 20",
-
-							url: "",
-						},
-						{
-							title: "Virtual Coaching: Lessons so far",
-							img: "https://plchldr.co/i/300x300",
-							date: "26 Aug 20",
-							url: "",
-						},
-						{
-							title: "Moving forward from Results day",
-							img: "https://plchldr.co/i/300x300",
-							date: "23 Aug 20",
-							url: "",
-						},
-					],
-				},
-			},
-		},
+		}
 	]);
 };

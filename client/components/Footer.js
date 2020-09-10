@@ -5,44 +5,53 @@ import { A, TransparentButton } from "../styles/components";
 import fetch from "../utilities/fetch";
 import { Facebook, Twitter, Instagram, Linkedin } from "react-feather";
 
- const FooterBar = styled.div`
-		min-height: 40vh;
-		background: ${s.black};
-		color: ${s.grey};
-		padding: 2vh 0;
-		ul {
+const FooterBar = styled.div`
+	min-height: 40vh;
+	background: ${s.black};
+	color: ${s.grey};
+	padding: 2vh 0;
+	div {
+		margin: 2vh 0;
+	}
+	ul {
+		margin: 2vh 0;
+		font-size: 90%;
+		h4 {
 			margin: 2vh 0;
 		}
-		button {
-			margin: 1vh 2vw;
-			padding: 0;
-			height: 50px;
-			width: 50px;
-			border-radius: 50%;
+		li {
+			line-height: 200%;
 		}
-		@media (max-width: ${s.tablet}) {
-			text-align: center;
+	}
+	button {
+		margin: 1vh 2vw;
+		padding: 0;
+		height: 50px;
+		width: 50px;
+		border-radius: 50%;
+	}
+	text-align: center;
+
+	@media (min-width: ${s.tablet}) {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr) auto;
+		padding: 2vh ${s.wPadding};
+		text-align: left;
+		ul {
+			margin: 0;
 			li {
-				line-height: 200%;
+				line-height: 150%;
 			}
 		}
-		@media (min-width: ${s.tablet}) {
-			display: grid;
-			grid-template-columns: repeat(4, 1fr) auto;
-			padding: 2vh ${s.wPadding};
-			ul {
-				margin: 0;
-			}
-			button {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
- `;
+	}
+`;
 
 export default function Footer() {
-   
 	const [footerLinks, setFooterLinks] = useState([]);
 	useEffect(() => fetch("/api/footer", setFooterLinks), []);
 	return (
@@ -50,7 +59,9 @@ export default function Footer() {
 			<div>&copy; 2020 Coaching Mind</div>
 			{footerLinks.map(({ title, links }) => (
 				<ul key={title}>
-					<li>{title}</li>
+					<li>
+						<h4>{title}</h4>
+					</li>
 					{links.map(({ text, url }) => (
 						<li key={text}>
 							<A>{text}</A>

@@ -1,23 +1,24 @@
 import styled from "styled-components";
+import * as s from "../styles/variables";
 import ReactMarkdown from "react-markdown";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 
-const Layout = styled.div``;
+const Layout = styled.article`
+	img {
+		max-width: 100%;
+		max-height: 50vh;
+	}
+	padding: 1vh ${s.wPadding};
+`;
 
-export default function BlogPost({ post: { body } }) {
+export default function BlogPost({ post: { title, image, body } }) {
 	return (
-		<div>
-			<Nav />
-			<main>
-				<Layout>
-					<ReactMarkdown
-						source={body}
-						transformImageUri={(input) => `http://localhost:1337${input}`}
-					/>
-				</Layout>
-			</main>
-			<Footer />
-		</div>
+		<Layout>
+			<h1>{title}</h1>
+			<img src={`http://localhost:1337${image.url}`} alt={title} />
+			<ReactMarkdown
+				source={body}
+				transformImageUri={(input) => `http://localhost:1337${input}`}
+			/>
+		</Layout>
 	);
 }

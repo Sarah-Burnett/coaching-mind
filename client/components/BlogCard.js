@@ -8,8 +8,12 @@ const Card = styled.div`
 	a:hover {
 		opacity: 0.7;
 	}
-	img {
-		max-width: 100%;
+	div {
+		height: 50vh;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		border-radius: 15px;
 	}
 	@media (max-width: ${s.desktop}) {
 		background: ${s.white};
@@ -20,12 +24,12 @@ const Card = styled.div`
 `;
 
 export default function BlogCard({
-	post: { title, image, publishedAt, slug, body },
+	item: { title, image, publishedAt, slug },
 }) {
-	const url = `/${slug}`;
+	const url = `/blog/${slug}`;
 	return (
 		<Card>
-			<img src={`http://localhost:1337${image.url}`} />
+			<div style={{ backgroundImage: `url(http://localhost:1337${image.url})` }} />
 			<a href={url}>
 				<h4>{title}</h4>
 			</a>

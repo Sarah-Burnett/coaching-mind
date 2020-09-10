@@ -1,8 +1,7 @@
-import React from 'react'
-import styled from 'styled-components';
-import * as s from '../styles/variables';
-import ThreeItem from './ThreeItem';
-import { GreySection } from '../styles/components';
+import React from "react";
+import styled from "styled-components";
+import * as s from "../styles/variables";
+import { GreySection } from "../styles/components";
 
 const Grid = styled.div`
 	display: grid;
@@ -15,13 +14,16 @@ const Grid = styled.div`
 	}
 `;
 
-export default function ThreeGrid({ text }) {
-    return (
-        <GreySection>
-            <h3>{text.heading}</h3>
-            <Grid>
-                {text.grid.map((item, index) => <ThreeItem key={index} item={item}/>)}
-            </Grid>
-        </GreySection>
-    )
+export default function ThreeGrid({ heading, grid, Component }) {
+	console.log(heading, grid, Component);
+	return (
+		<GreySection>
+			<h3>{heading}</h3>
+			<Grid>
+				{grid.map((item, index) => (
+                    <Component key={index} item={item}/>
+				))}
+			</Grid>
+		</GreySection>
+	);
 }

@@ -26,6 +26,10 @@ h1, h2, h3, h4 {
   font-family: 'Balsamiq Sans', cursive;
 }
 
+h1 {
+  text-align: center;
+}
+
 li {
   list-style: none;
 }

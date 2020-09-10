@@ -21,11 +21,11 @@ export default function Post() {
 		setLoading(false);
 	}, []);
 	return (
-		<div>
+		<main>
 			{loading && <div>Loading Post </div>}
 			{error && <div>Error</div>}
 			{post && <BlogPost post={post} />}
-		</div>
+		</main>
 	);
 }
 
