@@ -26,7 +26,6 @@ const Error = styled.div`
 // username can be username or email :)
 
 export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
-	console.log(auth);
 	const router = useRouter();
 	const [formValues, setFormValues] = useState({
 		identifier: "",
@@ -48,7 +47,6 @@ export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
 	};
 	const login = async (event) => {
 		event.preventDefault();
-		console.log(JSON.stringify(formValues));
 		const res = await fetch("http://localhost:1337/auth/local", {
 			//TODO: remove hardcoded url
 			method: "POST",

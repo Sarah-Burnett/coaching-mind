@@ -3,6 +3,7 @@ import styled from "styled-components";
 import * as s from "../styles/variables";
 import findComponent from "../utilities/findComponent";
 import fetch from "../utilities/fetch";
+import { useRouter } from "next/router";
 
 const Links = styled.ul`
 	font-size: 80%;
@@ -32,14 +33,17 @@ const Links = styled.ul`
 
 export default function NavLinks() {
 	const [links, setLinks] = useState([]);
+	const router = useRouter();
 	useEffect(() => fetch("/api/nav", setLinks), []);
 	return (
 		<Links>
-			{links.map(({ component, text }) => {
+			{links.map(({ component, text, url }) => {
 				const Component = findComponent(component);
 				return (
 					<li key={text}>
-						<Component color={s.red}>{text}</Component>
+						<Component href={url} onClick={() => router.push(url)} color={s.red}>
+							{text}
+						</Component>
 					</li>
 				);
 			})}

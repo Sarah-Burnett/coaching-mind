@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/coach/:username",
+      "handler": "coach.findByUsername",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
