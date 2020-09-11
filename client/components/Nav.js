@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 import { Menu, X } from "react-feather";
 import { A } from "../styles/components";
+import { useRouter } from "next/router";
 
 const NavBar = styled.nav`
 	background: ${s.red};
@@ -26,9 +27,14 @@ const NavBar = styled.nav`
 export default function Nav() {
 	const [isMobNavOpen, setIsMobNavOpen] = useState(false);
 	const toggleMobNav = () => setIsMobNavOpen((prev) => !prev);
+	const router = useRouter();
 	return (
 		<NavBar>
-			<img src="/logo.png" />
+			<img
+				src="/logo.png"
+				alt="Coaching Mind"
+				onClick={() => router.push("/")}
+			/>
 			<MediaQuery minDeviceWidth={s.desktop}>
 				<NavLinks />
 			</MediaQuery>
@@ -39,7 +45,7 @@ export default function Nav() {
 					classNames="fade"
 					unmountOnExit
 				>
-					<NavLinks />
+					<NavLinks setIsMobNavOpen={setIsMobNavOpen}/>
 				</CSSTransition>
 				<A onClick={toggleMobNav}>{isMobNavOpen ? <X /> : <Menu />}</A>
 			</MediaQuery>

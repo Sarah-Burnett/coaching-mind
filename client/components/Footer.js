@@ -32,7 +32,7 @@ const FooterBar = styled.div`
 	}
 	text-align: center;
 
-	@media (min-width: ${s.tablet}) {
+	@media (min-width: ${s.desktop}) {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr) auto;
 		padding: 2vh ${s.wPadding};
@@ -64,7 +64,7 @@ export default function Footer() {
 					</li>
 					{links.map(({ text, url }) => (
 						<li key={text}>
-							<A>{text}</A>
+							<A href={url}>{text}</A>
 						</li>
 					))}
 				</ul>

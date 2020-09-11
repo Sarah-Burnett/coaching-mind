@@ -5,7 +5,7 @@ import * as s from "./variables";
 export const Button = styled.button`
 	border: 2px solid ${s.white};
 	border-radius: 30px;
-	padding: 2vh 3vw;
+	padding: 2vh 4vw;
 	font-family: inherit;
 	font-size: inherit;
 	font-weight: bold;
@@ -67,4 +67,21 @@ export const Img = styled.div`
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: ${s.white};
 `;
+
+export const Heading = styled.h1`
+	padding: 3em;
+	background: ${(props) => (props.color ? s[props.color] : s.red)};
+	color: ${s.white};
+	margin: 0;
+`;
+
+export const Error = styled.div`
+	color: ${s.red};
+	font-size: 90%;
+`

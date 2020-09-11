@@ -2,17 +2,17 @@ import styled from "styled-components";
 import * as s from "../styles/variables";
 import Head from "next/head";
 import BlogCard from "../components/BlogCard";
+import { Heading } from "../styles/components";
 
 const Wrapper = styled.div`
 	display: grid;
 	align-items: center;
 	justify-content: center;
 	color: ${s.blue};
-	grid-template-columns: auto;
-	@media (min-width: ${s.desktop}) {
-		grid-template-columns: repeat(3, 1fr);
-	}
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 `;
+
+
 
 export default function Blog({ posts }) {
 	return (
@@ -20,7 +20,7 @@ export default function Blog({ posts }) {
 			<Head>
 				<title>Blog</title>
 			</Head>
-			<h1>Blog</h1>
+			<Heading color="purple">Blog</Heading>
 			<Wrapper>
 				{posts.length > 1 ? (
 					posts.map((post) => (

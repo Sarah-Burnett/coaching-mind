@@ -31,17 +31,21 @@ const Links = styled.ul`
 	}
 `;
 
-export default function NavLinks() {
+export default function NavLinks({ setIsMobNavOpen }) {
 	const [links, setLinks] = useState([]);
 	const router = useRouter();
 	useEffect(() => fetch("/api/nav", setLinks), []);
 	return (
-		<Links>
+		<Links onClick={() => setIsMobNavOpen(false)}>
 			{links.map(({ component, text, url }) => {
 				const Component = findComponent(component);
 				return (
 					<li key={text}>
-						<Component href={url} onClick={() => router.push(url)} color={s.red}>
+						<Component
+							href={url}
+							onClick={() => router.push(url)}
+							color={s.red}
+						>
 							{text}
 						</Component>
 					</li>

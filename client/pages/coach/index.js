@@ -25,7 +25,7 @@ export default function Coach({ auth: { isAuth, jwt, username } }) {
 	);
 }
 
-const sjddsj = [
+const coachjson = [
 	{
 		id: 1,
 		programme: {

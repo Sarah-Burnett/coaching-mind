@@ -18,7 +18,7 @@ export default (req, res) => {
 		{
 			component: "Video",
 			props: {
-				img: "https://plchldr.co/i/800x250",
+				img: "https://plchldr.co/i/800x400",
 				text: {
 					heading: "Watch our video to find out more:",
 				},
@@ -46,7 +46,7 @@ export default (req, res) => {
 				img: "https://plchldr.co/i/800x250",
 				text: {
 					heading: "Coaching in Secondary Schools",
-					date:
+					p:
 						"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta beatae itaque" +
 						"quia, expedita officiis nemo vitae modi hic rerum quidem, unde enim ullam," +
 						"corporis fugiat deserunt numquam. Explicabo, repellat aut?",

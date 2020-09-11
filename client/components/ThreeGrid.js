@@ -4,13 +4,13 @@ import * as s from "../styles/variables";
 import { GreySection } from "../styles/components";
 
 const Grid = styled.div`
-	display: grid;
-	align-items: center;
-	justify-content: center;
+	width: 100vw;
 	color: ${s.blue};
-	grid-template-columns: auto;
 	@media (min-width: ${s.desktop}) {
-		grid-template-columns: repeat(3, 1fr);
+		display: grid;
+		align-items: center;
+		justify-content: center;
+		grid-template-columns: repeat(3, minmax(325px, 1fr));
 	}
 `;
 

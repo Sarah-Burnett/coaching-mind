@@ -6,7 +6,7 @@ export default (req, res) => {
 			links: [
 				{
 					text: "Coaching",
-					url: "",
+					url: "/coaching",
 				},
 				{
 					text: "Social...",
@@ -14,11 +14,11 @@ export default (req, res) => {
 				},
 				{
 					text: "Blog",
-					url: "",
+					url: "/blog",
 				},
 				{
 					text: "FAQ",
-					url: "",
+					url: "/faq",
 				},
 			],
 		},
@@ -27,15 +27,15 @@ export default (req, res) => {
 			links: [
 				{
 					text: "About us",
-					url: "",
+					url: "/about",
 				},
 				{
 					text: "Our Team",
-					url: "",
+					url: "/team",
 				},
 				{
 					text: "Our Coaches",
-					url: "",
+					url: "/coaches",
 				},
 			],
 		},
@@ -44,19 +44,19 @@ export default (req, res) => {
 			links: [
 				{
 					text: "Contact us",
-					url: "",
+					url: "/#contact",
 				},
 				{
 					text: "Become a coach",
-					url: "",
+					url: "/join/coach",
 				},
 				{
 					text: "Become a partner",
-					url: "",
+					url: "/join/school",
 				},
 				{
 					text: "Vacancies",
-					url: "",
+					url: "/careers",
 				},
 			],
 		},

@@ -1,29 +1,33 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { FilledButton, Error } from "../styles/components";
+import * as s from "../styles/variables";
+
+const Section = styled.section`
+	background: ${s.purple};
+`;
 
 const Form = styled.form`
 	height: 70vh;
-	width: 100vw;
-	background: lightslategray;
+	width: 90vw;
+	margin: auto;
+	background: ${s.purple};
+	color: ${s.white};
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
-	input {
-		display: block;
-		&:invalid {
-			border: 1px solid red;
+	button {
+		width: 85vw;
+	}
+	@media(min-width: ${s.tablet}){
+		width: 50vw;
+		button {
+			width: auto;
 		}
 	}
-	margin: auto;
 `;
-
-const Error = styled.div`
-	color: red;
-	font-size: 80%;
-`;
-// username can be username or email :)
 
 export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
 	const router = useRouter();
@@ -72,30 +76,32 @@ export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
 		router.prefetch("/coach");
 	}, []);
 	return (
-		<Form onSubmit={login} noValidate>
-			<h3>Login</h3>
-			<Error>
-				{errors && errors.map((error) => <span key={error}>{error}</span>)}
-			</Error>
-			<label htmlFor="identifier">Username or Email</label>
-			<input
-				id="identifier"
-				value={formValues.identifier}
-				onChange={handleChange}
-				required
-				placeholder="Username or Email"
-			/>
-			<label htmlFor="password">Password</label>
-			<input
-				type="password"
-				id="password"
-				value={formValues.password}
-				onChange={handleChange}
-				placeholder="Password"
-				required
-			/>
-			<button>Login</button>
-		</Form>
+		<Section>
+			<Form onSubmit={login} noValidate>
+				<h3>Login</h3>
+				<Error>
+					{errors && errors.map((error) => <span key={error}>{error}</span>)}
+				</Error>
+				<label htmlFor="identifier">Username or Email</label>
+				<input
+					id="identifier"
+					value={formValues.identifier}
+					onChange={handleChange}
+					required
+					placeholder="Username or Email"
+				/>
+				<label htmlFor="password">Password</label>
+				<input
+					type="password"
+					id="password"
+					value={formValues.password}
+					onChange={handleChange}
+					placeholder="Password"
+					required
+				/>
+				<FilledButton color="purple">Login</FilledButton>
+			</Form>
+		</Section>
 	);
 }
 
