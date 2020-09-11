@@ -60,3 +60,11 @@ export const GreySection = styled.section`
 		text-transform: uppercase;
 	}
 `;
+
+export const Img = styled.div`
+	min-height: 50vh;
+	background-color: lightblue;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+`;

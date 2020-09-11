@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coachees",
+  "info": {
+    "name": "Coachees"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "coach": {
+      "model": "coach",
+      "via": "coachee"
+    },
+    "programme": {
+      "model": "programme",
+      "via": "coachee"
+    },
+    "subject": {
+      "type": "enumeration",
+      "enum": [
+        "Maths",
+        "Science",
+        "English"
+      ]
+    },
+    "coacheeId": {
+      "type": "uid",
+      "required": true,
+      "maxLength": 8,
+      "minLength": 8
+    },
+    "current": {
+      "type": "boolean",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true,
+      "private": true
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    }
+  }
+}

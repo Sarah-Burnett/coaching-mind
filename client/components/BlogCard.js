@@ -8,13 +8,6 @@ const Card = styled.div`
 	a:hover {
 		opacity: 0.7;
 	}
-	div {
-		height: 50vh;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center;
-		border-radius: 15px;
-	}
 	@media (max-width: ${s.desktop}) {
 		background: ${s.white};
 		border-radius: 15px;
@@ -23,13 +16,21 @@ const Card = styled.div`
 	}
 `;
 
+const Img = styled.div`
+	height: 50vh;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 15px;
+`;
+
 export default function BlogCard({
 	item: { title, image, publishedAt, slug },
 }) {
 	const url = `/blog/${slug}`;
 	return (
 		<Card>
-			<div style={{ backgroundImage: `url(http://localhost:1337${image.url})` }} />
+			<Img style={{ backgroundImage: `url(http://localhost:1337${image.url})` }} />
 			<a href={url}>
 				<h4>{title}</h4>
 			</a>

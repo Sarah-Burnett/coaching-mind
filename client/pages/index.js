@@ -9,24 +9,22 @@ import ThreeGrid from "../components/ThreeGrid";
 
 export default function Index({ posts, index }) {
 	return (
-		<div>
+		<>
 			<Head>
 				<title>Coaching Mind</title>
 			</Head>
-			<main>
-				{index.map(({ component, props }, index) => {
-					const Component = findComponent(component);
-					return <Component key={index} {...props} />;
-				})}
-				{posts && (
-					<ThreeGrid
-						heading="Find out more on our Blog"
-						grid={posts}
-						Component={BlogCard}
-					/>
-				)}
-			</main>
-		</div>
+			{index.map(({ component, props }, index) => {
+				const Component = findComponent(component);
+				return <Component key={index} {...props} />;
+			})}
+			{posts && (
+				<ThreeGrid
+					heading="Find out more on our Blog"
+					grid={posts}
+					Component={BlogCard}
+				/>
+			)}
+		</>
 	);
 }
 
@@ -35,6 +33,5 @@ Index.getInitialProps = async () => {
 	const index = await indexJson.json();
 	const postsJson = await fetch("http://localhost:1337/posts");
 	const posts = await postsJson.json();
-	console.log(index, posts);
 	return { posts, index };
 };

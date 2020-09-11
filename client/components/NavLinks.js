@@ -1,7 +1,8 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import * as s from "../styles/variables";
 import findComponent from "../utilities/findComponent";
+import fetch from "../utilities/fetch";
 
 const Links = styled.ul`
 	font-size: 80%;
@@ -17,9 +18,21 @@ const Links = styled.ul`
 	align-items: center;
 	justify-content: space-evenly;
 	padding: 0;
+	@media (min-width: ${s.desktop}) {
+		position: static;
+		font-size: 80%;
+		flex-direction: row;
+		justify-content: flex-end;
+		height: 15vh;
+		li {
+			padding: 1vh 1vw;
+		}
+	}
 `;
 
-export default function MobNavLinks({links}) {
+export default function NavLinks() {
+	const [links, setLinks] = useState([]);
+	useEffect(() => fetch("/api/nav", setLinks), []);
 	return (
 		<Links>
 			{links.map(({ component, text }) => {

@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as s from "../styles/variables";
-import NavLinksMob from "./NavLinksMob";
+import NavLinks from "./NavLinks";
 import MediaQuery from "react-responsive";
-import NavLinksDesk from "./NavLinksDesk";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 import { Menu, X } from "react-feather";
 import { A } from "../styles/components";
-import fetch from "../utilities/fetch";
 
 const NavBar = styled.nav`
 	background: ${s.red};
@@ -26,15 +24,13 @@ const NavBar = styled.nav`
 	font-weight: bold;
 `;
 export default function Nav() {
-	const [navLinks, setNavLinks] = useState([]);
 	const [isMobNavOpen, setIsMobNavOpen] = useState(false);
 	const toggleMobNav = () => setIsMobNavOpen((prev) => !prev);
-	useEffect(() => fetch('/api/nav', setNavLinks), [])
 	return (
 		<NavBar>
 			<img src="/logo.png" />
 			<MediaQuery minDeviceWidth={s.desktop}>
-				<NavLinksDesk links={navLinks} />
+				<NavLinks />
 			</MediaQuery>
 			<MediaQuery maxDeviceWidth={s.desktop}>
 				<CSSTransition
@@ -43,7 +39,7 @@ export default function Nav() {
 					classNames="fade"
 					unmountOnExit
 				>
-					<NavLinksMob links={navLinks} />
+					<NavLinks />
 				</CSSTransition>
 				<A onClick={toggleMobNav}>{isMobNavOpen ? <X /> : <Menu />}</A>
 			</MediaQuery>

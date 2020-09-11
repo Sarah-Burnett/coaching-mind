@@ -1,24 +1,42 @@
-import React from "react";
-import TwoImg from "./TwoImg";
-import TwoText from "./TwoText";
+import styled from "styled-components";
 import * as s from "../styles/variables";
+import { Img, FilledButton } from "../styles/components";
 
-export default function Grid({ reverse, text, img }) {
-	const flexDirection = () => reverse ? "row-reverse" : "reverse"; 
+const Grid = styled.section`
+	@media (min-width: ${s.tablet}) {
+		display: flex;
+		min-height: 50vh;
+		justify-content: center;
+	}
+	div {
+		width: 100vw;
+		color: ${s.white};
+		display: block;
+		h3,
+		p {
+			width: 100%;
+		}
+		@media (min-width: ${s.tablet}) {
+			width: 50vw;
+		}
+	}
+	div:nth-child(2) {
+		padding: 2vh ${s.wPadding};
+	}
+`;
+
+export default function TwoGrid({ reverse, text, img }) {
+	const flexDirection = () => (reverse ? "row-reverse" : "reverse");
 	return (
-		<>
-			<section>
-				<TwoImg src={img} />
-				<TwoText text={text} />
-			</section>
-			<style jsx>{`
-				@media (min-width: ${s.tablet}) {
-					display: flex;
-					min-height: 50vh;
-					justify-content: center;
-					flex-direction: ${flexDirection()};
-				}
-			`}</style>
-		</>
+		<Grid style={{ flexDirection: flexDirection() }}>
+			<Img style={{ backgroundImage: `url(${img})` }} />
+			<div style={{ background: s[text.color] }}>
+				<h3>{text.heading}</h3>
+				<p>{text.p}</p>
+				<p>
+					<FilledButton color={text.color}>{text.button}</FilledButton>
+				</p>
+			</div>
+		</Grid>
 	);
 }

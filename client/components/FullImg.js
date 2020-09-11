@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { FilledButton } from "../styles/components";
+import { FilledButton, Img } from "../styles/components";
 import * as s from "../styles/variables";
 
 export default function FullImg({ img, text }) {
-	const FullImage = styled.div`
-		background: lightblue url(${img}) no-repeat center;
-		background-size: cover;
+	const FullImage = styled(Img)`
 		min-height: 90vh;
         display: flex;
         flex-direction: column;
@@ -19,7 +17,7 @@ export default function FullImg({ img, text }) {
 		}
 	`;
 	return (
-		<FullImage img={img}>
+		<FullImage style={{ backgroundImage: `url(${img})` }}>
 			<h1>{text.heading}</h1>
 			<h4>{text.p}</h4>
 			<p>

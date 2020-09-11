@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/coachees",
+      "handler": "coachees.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/coachees/count",
+      "handler": "coachees.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/coachees/:id",
+      "handler": "coachees.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/coachees",
+      "handler": "coachees.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/coachees/:id",
+      "handler": "coachees.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/coachees/:id",
+      "handler": "coachees.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

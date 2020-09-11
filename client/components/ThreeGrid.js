@@ -15,7 +15,6 @@ const Grid = styled.div`
 `;
 
 export default function ThreeGrid({ heading, grid, Component }) {
-	console.log(heading, grid, Component);
 	return (
 		<GreySection>
 			<h3>{heading}</h3>
