@@ -5,8 +5,4 @@
  * to customize this controller
  */
 
-module.exports = {
-  findByUsername: async (ctx) => {
-    return await strapi.query("coach").findOne({ user: { id: 1 } });
-  },
-};
+module.exports = {};
