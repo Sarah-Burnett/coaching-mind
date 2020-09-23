@@ -4,31 +4,6 @@ import styled from "styled-components";
 import { FilledButton, Error } from "../styles/components";
 import * as s from "../styles/variables";
 
-const Section = styled.section`
-	background: ${s.purple};
-`;
-
-const Form = styled.form`
-	height: 70vh;
-	width: 90vw;
-	margin: auto;
-	background: ${s.purple};
-	color: ${s.white};
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-evenly;
-	button {
-		width: 85vw;
-	}
-	@media(min-width: ${s.tablet}){
-		width: 50vw;
-		button {
-			width: auto;
-		}
-	}
-`;
-
 export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
 	const router = useRouter();
 	const [formValues, setFormValues] = useState({
@@ -105,37 +80,27 @@ export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
 	);
 }
 
-const json = {
-	jwt:
-		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk5ODI0MzYxLCJleHAiOjE2MDI0MTYzNjF9._dGj80ygnXiITuM25-71x5007PtSk0sFd0FHe8GGkd8",
-	user: {
-		id: 1,
-		username: "s.burnett",
-		email: "sarahkvburnett@gmail.com",
-		provider: "local",
-		confirmed: true,
-		blocked: false,
-		role: {
-			id: 4,
-			name: "Coach",
-			description: "",
-			type: "coach",
-			created_by: null,
-			updated_by: null,
-		},
-		created_by: {
-			id: 1,
-			firstname: "Sarah",
-			lastname: "Burnett",
-			username: null,
-		},
-		updated_by: {
-			id: 1,
-			firstname: "Sarah",
-			lastname: "Burnett",
-			username: null,
-		},
-		created_at: "2020-09-09T13:19:39.861Z",
-		updated_at: "2020-09-11T09:38:00.712Z",
-	},
-};
+const Section = styled.section`
+	background: ${s.purple};
+`;
+
+const Form = styled.form`
+	height: 70vh;
+	width: 90vw;
+	margin: auto;
+	background: ${s.purple};
+	color: ${s.white};
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	button {
+		width: 85vw;
+	}
+	@media (min-width: ${s.tablet}) {
+		width: 50vw;
+		button {
+			width: auto;
+		}
+	}
+`;

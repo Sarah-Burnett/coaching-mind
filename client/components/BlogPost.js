@@ -3,16 +3,6 @@ import * as s from "../styles/variables";
 import ReactMarkdown from "react-markdown";
 import { Heading, Img } from "../styles/components";
 
-const Layout = styled.article`
-	padding: 1vh ${s.wPadding};
-	a {
-		color: ${s.blue};
-		&:hover {
-			color: ${s.red};
-		}
-	}
-`;
-
 export default function BlogPost({ post: { title, image, body } }) {
 	return (
 		<>
@@ -29,3 +19,13 @@ export default function BlogPost({ post: { title, image, body } }) {
 		</>
 	);
 }
+
+const Layout = styled.article`
+	padding: 1vh ${s.wPadding};
+	a {
+		color: ${s.blue};
+		&:hover {
+			color: ${s.red};
+		}
+	}
+`;

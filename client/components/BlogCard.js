@@ -2,6 +2,26 @@ import styled from "styled-components";
 import * as s from "../styles/variables";
 import Moment from "react-moment";
 
+export default function BlogCard({
+	item: { title, image, publishedAt, slug },
+}) {
+	const url = `/blog/${slug}`;
+	return (
+		<Card>
+			<Img color="white"
+				style={{ backgroundImage: `url(http://localhost:1337${image.url})` }}
+			/>
+			<a href={url}>
+				<h3>{title}</h3>
+			</a>
+			<p>
+				<Moment format="MMM Do YYYY">{publishedAt}</Moment>
+			</p>
+			<a href={url}>Read more →</a>
+		</Card>
+	);
+}
+
 const Card = styled.div`
 	max-width: 90vw;
 	padding: 2vh 2vw;
@@ -33,23 +53,3 @@ const Img = styled.div`
 	background-position: center;
 	border-radius: 15px;
 `;
-
-export default function BlogCard({
-	item: { title, image, publishedAt, slug },
-}) {
-	const url = `/blog/${slug}`;
-	return (
-		<Card>
-			<Img color="white"
-				style={{ backgroundImage: `url(http://localhost:1337${image.url})` }}
-			/>
-			<a href={url}>
-				<h3>{title}</h3>
-			</a>
-			<p>
-				<Moment format="MMM Do YYYY">{publishedAt}</Moment>
-			</p>
-			<a href={url}>Read more →</a>
-		</Card>
-	);
-}

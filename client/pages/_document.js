@@ -41,6 +41,7 @@ class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
 						rel="stylesheet"
 					/>
+					<link href="/favicon.png" rel="icon" type="image/png" />
 				</Head>
 				<body>
 					<Main />

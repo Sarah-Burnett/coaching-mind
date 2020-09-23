@@ -5,6 +5,50 @@ import { A, TransparentButton } from "../styles/components";
 import fetch from "../utilities/fetch";
 import { Facebook, Twitter, Instagram, Linkedin } from "react-feather";
 
+export default function Footer() {
+	const [footerLinks, setFooterLinks] = useState([]);
+	useEffect(() => fetch("/api/footer", setFooterLinks), []);
+	return (
+		<FooterBar>
+			<div>&copy; 2020 Coaching Mind</div>
+			{footerLinks.map(({ title, links }) => (
+				<ul key={title}>
+					<li>
+						<h4>{title}</h4>
+					</li>
+					{links.map(({ text, url }) => (
+						<li key={text}>
+							<A href={url}>{text}</A>
+						</li>
+					))}
+				</ul>
+			))}
+			<div>
+				<a href="">
+					<TransparentButton>
+						<Facebook />
+					</TransparentButton>
+				</a>
+				<a href="">
+					<TransparentButton>
+						<Instagram />
+					</TransparentButton>
+				</a>
+				<a href="">
+					<TransparentButton>
+						<Twitter />
+					</TransparentButton>
+				</a>
+				<a href="">
+					<TransparentButton>
+						<Linkedin />
+					</TransparentButton>
+				</a>
+			</div>
+		</FooterBar>
+	);
+}
+
 const FooterBar = styled.div`
 	min-height: 40vh;
 	background: ${s.black};
@@ -50,47 +94,3 @@ const FooterBar = styled.div`
 		}
 	}
 `;
-
-export default function Footer() {
-	const [footerLinks, setFooterLinks] = useState([]);
-	useEffect(() => fetch("/api/footer", setFooterLinks), []);
-	return (
-		<FooterBar>
-			<div>&copy; 2020 Coaching Mind</div>
-			{footerLinks.map(({ title, links }) => (
-				<ul key={title}>
-					<li>
-						<h4>{title}</h4>
-					</li>
-					{links.map(({ text, url }) => (
-						<li key={text}>
-							<A href={url}>{text}</A>
-						</li>
-					))}
-				</ul>
-			))}
-			<div>
-				<a href="">
-					<TransparentButton>
-						<Facebook />
-					</TransparentButton>
-				</a>
-				<a href="">
-					<TransparentButton>
-						<Instagram />
-					</TransparentButton>
-				</a>
-				<a href="">
-					<TransparentButton>
-						<Twitter />
-					</TransparentButton>
-				</a>
-				<a href="">
-					<TransparentButton>
-						<Linkedin />
-					</TransparentButton>
-				</a>
-			</div>
-		</FooterBar>
-	);
-}

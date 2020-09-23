@@ -2,29 +2,6 @@ import styled from "styled-components";
 import * as s from "../styles/variables";
 import { Img, FilledButton } from "../styles/components";
 
-const Grid = styled.section`
-	@media (min-width: ${s.tablet}) {
-		display: flex;
-		min-height: 50vh;
-		justify-content: center;
-	}
-	div {
-		width: 100vw;
-		color: ${s.white};
-		display: block;
-		h3,
-		p {
-			width: 100%;
-		}
-		@media (min-width: ${s.tablet}) {
-			width: 50vw;
-		}
-	}
-	div:nth-child(2) {
-		padding: 2vh ${s.wPadding};
-	}
-`;
-
 export default function TwoGrid({ reverse, text, img }) {
 	const flexDirection = () => (reverse ? "row-reverse" : "reverse");
 	return (
@@ -40,3 +17,29 @@ export default function TwoGrid({ reverse, text, img }) {
 		</Grid>
 	);
 }
+
+const Grid = styled.section`
+	div {
+		width: 100vw;
+		color: ${s.white};
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		h3,
+		p {
+			width: 100%;
+		}
+		@media (min-width: ${s.tablet}) {
+			width: 50vw;
+		}
+	}
+	div:nth-child(2) {
+		padding: 2vh ${s.wPadding};
+	}
+	@media (min-width: ${s.tablet}) {
+		display: flex;
+		min-height: 85vh;
+		justify-content: center;
+	}
+`;

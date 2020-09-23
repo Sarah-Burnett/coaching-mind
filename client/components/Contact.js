@@ -3,40 +3,6 @@ import styled from "styled-components";
 import * as s from "../styles/variables";
 import { FilledButton, Error } from "../styles/components";
 
-const Form = styled.form`
-	background: ${s.blue};
-	min-height: 60vh;
-    padding: 15vh ${s.wPadding};
-	color: ${s.white};
-	div {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		input {
-			margin-bottom: 2vw;
-		}
-	}
-	textarea {
-		min-height: 40vh;
-	}
-	button {
-		margin: 4vh 0;
-		width: 90vw;
-    }
-	@media (min-width: ${s.tablet}) {
-		div {
-			flex-direction: row;
-			input:nth-child(1) {
-				margin-right: 2vw;
-			}
-        }
-        button {
-            width: 150px;
-        }
-	}
-`;
-
 export default function Contact() {
 	const [formValues, setFormValues] = useState({
 		name: "",
@@ -98,3 +64,37 @@ export default function Contact() {
 		</Form>
 	);
 }
+
+const Form = styled.form`
+	background: ${s.blue};
+	min-height: 60vh;
+	padding: 15vh ${s.wPadding};
+	color: ${s.white};
+	div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		input {
+			margin-bottom: 2vw;
+		}
+	}
+	textarea {
+		min-height: 40vh;
+	}
+	button {
+		margin: 4vh 0;
+		width: 90vw;
+	}
+	@media (min-width: ${s.tablet}) {
+		div {
+			flex-direction: row;
+			input:nth-child(1) {
+				margin-right: 2vw;
+			}
+		}
+		button {
+			width: 150px;
+		}
+	}
+`;

@@ -5,6 +5,30 @@ import findComponent from "../utilities/findComponent";
 import fetch from "../utilities/fetch";
 import { useRouter } from "next/router";
 
+export default function NavLinks({ toggleMobNav }) {
+	const [links, setLinks] = useState([]);
+	const router = useRouter();
+	useEffect(() => fetch("/api/nav", setLinks), []);
+	return (
+		<Links onClick={toggleMobNav}>
+			{links.map(({ component, text, url }) => {
+				const Component = findComponent(component);
+				return (
+					<li key={text}>
+						<Component
+							href={url}
+							onClick={() => router.push(url)}
+							color={s.red}
+						>
+							{text}
+						</Component>
+					</li>
+				);
+			})}
+		</Links>
+	);
+}
+
 const Links = styled.ul`
 	font-size: 80%;
 	position: absolute;
@@ -30,27 +54,3 @@ const Links = styled.ul`
 		}
 	}
 `;
-
-export default function NavLinks({ toggleMobNav }) {
-	const [links, setLinks] = useState([]);
-	const router = useRouter();
-	useEffect(() => fetch("/api/nav", setLinks), []);
-	return (
-		<Links onClick={toggleMobNav}>
-			{links.map(({ component, text, url }) => {
-				const Component = findComponent(component);
-				return (
-					<li key={text}>
-						<Component
-							href={url}
-							onClick={() => router.push(url)}
-							color={s.red}
-						>
-							{text}
-						</Component>
-					</li>
-				);
-			})}
-		</Links>
-	);
-}

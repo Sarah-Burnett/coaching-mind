@@ -9,10 +9,6 @@ export default (req, res) => {
 					url: "/coaching",
 				},
 				{
-					text: "Social...",
-					url: "",
-				},
-				{
 					text: "Blog",
 					url: "/blog",
 				},

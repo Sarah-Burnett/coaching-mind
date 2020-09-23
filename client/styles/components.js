@@ -26,8 +26,8 @@ export const TransparentButton = styled(Button)`
 export const FilledButton = styled(Button)`
 	background: ${s.white};
 	color: ${(props) => (props.color ? s[props.color] : s.red)};
-	&:hover {
-		opacity: 0.7;
+	&:not(:hover) {
+		transform: scale(0.9);
 	}
 `;
 
@@ -84,4 +84,4 @@ export const Heading = styled.h1`
 export const Error = styled.div`
 	color: ${s.red};
 	font-size: 90%;
-`
+`;

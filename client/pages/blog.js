@@ -4,16 +4,6 @@ import Head from "next/head";
 import BlogCard from "../components/BlogCard";
 import { Heading } from "../styles/components";
 
-const Wrapper = styled.div`
-	display: grid;
-	align-items: center;
-	justify-content: center;
-	color: ${s.blue};
-	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-`;
-
-
-
 export default function Blog({ posts }) {
 	return (
 		<>
@@ -41,3 +31,12 @@ Blog.getInitialProps = async () => {
 	const posts = await res.json();
 	return { posts };
 };
+
+const Wrapper = styled.div`
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	color: ${s.blue};
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+`;
+

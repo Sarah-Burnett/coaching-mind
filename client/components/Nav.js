@@ -8,22 +8,6 @@ import { Menu, X } from "react-feather";
 import { A } from "../styles/components";
 import { useRouter } from "next/router";
 
-const NavBar = styled.nav`
-	background: ${s.red};
-	position: fixed;
-	height: 15vh;
-	width: 100vw;
-	top: 0;
-	left: 0;
-	padding: 1vh ${s.wPadding};
-	img {
-		max-height: 100%;
-	}
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	font-weight: bold;
-`;
 export default function Nav() {
 	const [isMobNavOpen, setIsMobNavOpen] = useState(false);
 	const toggleMobNav = () => setIsMobNavOpen((prev) => !prev);
@@ -45,10 +29,28 @@ export default function Nav() {
 					classNames="fade"
 					unmountOnExit
 				>
-					<NavLinks toggleMobNav={toggleMobNav}/>
+					<NavLinks toggleMobNav={toggleMobNav} />
 				</CSSTransition>
 				<A onClick={toggleMobNav}>{isMobNavOpen ? <X /> : <Menu />}</A>
 			</MediaQuery>
 		</NavBar>
 	);
 }
+
+const NavBar = styled.nav`
+	background: ${s.red};
+	position: fixed;
+	z-index: 1000;
+	height: 15vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	padding: 1vh ${s.wPadding};
+	img {
+		max-height: 100%;
+	}
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: bold;
+`;

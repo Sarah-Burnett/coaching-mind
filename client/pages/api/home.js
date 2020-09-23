@@ -4,7 +4,7 @@ export default (req, res) => {
 		{
 			component: "FullImg",
 			props: {
-				img: "https://plchldr.co/i/800x250",
+				img: ["/virtual-learning.jpg", "/virtual-learning-mob.jpg"],
 				text: {
 					heading: "Our new virtual coaching platform",
 					p:
@@ -27,7 +27,7 @@ export default (req, res) => {
 		{
 			component: "TwoGrid",
 			props: {
-				img: "https://plchldr.co/i/800x250",
+				img: "/primary.jpg",
 				text: {
 					heading: "Coaching in Primary Schools",
 					p:
@@ -43,7 +43,7 @@ export default (req, res) => {
 			component: "TwoGrid",
 			props: {
 				reverse: true,
-				img: "https://plchldr.co/i/800x250",
+				img: "/secondary.jpg",
 				text: {
 					heading: "Coaching in Secondary Schools",
 					p:
@@ -58,7 +58,7 @@ export default (req, res) => {
 		{
 			component: "TwoGrid",
 			props: {
-				img: "https://plchldr.co/i/800x250",
+				img: "/workplace.jpg",
 				text: {
 					heading: "Coaching in the Workplace",
 					p:
@@ -69,6 +69,6 @@ export default (req, res) => {
 					color: "purple",
 				},
 			},
-		}
+		},
 	]);
 };

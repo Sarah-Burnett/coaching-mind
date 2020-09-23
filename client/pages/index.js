@@ -6,8 +6,6 @@ import BlogCard from "../components/BlogCard";
 import ThreeGrid from "../components/ThreeGrid";
 import Contact from "../components/Contact";
 
-//TODO: error boundary
-
 export default function Index({ posts, index }) {
 	return (
 		<>
