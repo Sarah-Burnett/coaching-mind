@@ -31,12 +31,12 @@ const Links = styled.ul`
 	}
 `;
 
-export default function NavLinks({ setIsMobNavOpen }) {
+export default function NavLinks({ toggleMobNav }) {
 	const [links, setLinks] = useState([]);
 	const router = useRouter();
 	useEffect(() => fetch("/api/nav", setLinks), []);
 	return (
-		<Links onClick={() => setIsMobNavOpen(false)}>
+		<Links onClick={toggleMobNav}>
 			{links.map(({ component, text, url }) => {
 				const Component = findComponent(component);
 				return (

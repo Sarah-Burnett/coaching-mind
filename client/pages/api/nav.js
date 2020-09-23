@@ -2,19 +2,19 @@ export default (req, res) => {
 	res.statusCode = 200;
 	res.json([
 		{
-			text: "About us",
+			text: "About",
 			component: "A",
 			url: "/about",
 		},
 		{
-			text: "For Schools",
+			text: "Blog",
 			component: "A",
-			url: "/schools",
+			url: "/blog",
 		},
 		{
-			text: "For Coaches",
+			text: "Contact",
 			component: "A",
-			url: "/coaches",
+			url: "/#contact",
 		},
 		{
 			text: "Login",
@@ -22,9 +22,9 @@ export default (req, res) => {
 			url: "/login",
 		},
 		{
-			text: "Contact",
+			text: "Join",
 			component: "TransparentButton",
-			url: "/#contact",
+			url: "/#join",
 		},
 	]);
 };

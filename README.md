@@ -12,7 +12,8 @@ Private:
 - Coach - page exists needs work
 
 ## To do or more just brainstorming ideas at the moment
-- Add images to index to look into compressing
+- Brush up styling / check responsive
+- Add images to index to look into compressing - look at using html5 picture for different size screens
 - Connect up contact form
 - Logout page
 - Develop coach page - style existing, add in buttons to link to forms, eventually add progress graph (recharts) etc.

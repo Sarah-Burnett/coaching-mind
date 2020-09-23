@@ -45,7 +45,7 @@ export default function Nav() {
 					classNames="fade"
 					unmountOnExit
 				>
-					<NavLinks setIsMobNavOpen={setIsMobNavOpen}/>
+					<NavLinks toggleMobNav={toggleMobNav}/>
 				</CSSTransition>
 				<A onClick={toggleMobNav}>{isMobNavOpen ? <X /> : <Menu />}</A>
 			</MediaQuery>
