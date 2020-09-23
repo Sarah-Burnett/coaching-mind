@@ -25,7 +25,7 @@ Private:
 
 ## Installation
 ``` bash
-#See package.json for commands - next, strapi and concurrent dev option
+# See package.json for commands - next, strapi and concurrent dev option
 # Next on port 3000, strapi on port 1337
 ```
 
