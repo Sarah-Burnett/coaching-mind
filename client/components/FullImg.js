@@ -4,18 +4,24 @@ import { FilledButton, Img } from "../styles/components";
 import * as s from "../styles/variables";
 import useWindowSize from "../utilities/useWindowSize";
 
-export default function FullImg({ img, text }) {
+export default function FullImg({ img, text, click, color }) {
 	const { width } = useWindowSize();
 	const setBackgroundImage = (size) => {
-		if (width > 400) return `url(${img[0]})`;
-		else return `url(${img[1]})`;
+		let index = 1;
+		if (width > 400) index = 0;
+		return `linear-gradient(
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ), url(${img[index]}) `;
 	};
 	return (
 		<FullImage style={{ backgroundImage: setBackgroundImage() }}>
 			<h1>{text.heading}</h1>
 			<h4>{text.p}</h4>
 			<p>
-				<FilledButton color={text.color}>{text.button}</FilledButton>
+				<FilledButton onClick={click} color="black">
+					{text.button}
+				</FilledButton>
 			</p>
 		</FullImage>
 	);

@@ -12,18 +12,16 @@ export default function Footer() {
 		<FooterBar>
 			<div>&copy; 2020 Coaching Mind</div>
 			{footerLinks.map(({ title, links }) => (
-				<ul key={title}>
-					<li>
-						<h4>{title}</h4>
-					</li>
+				<section key={title}>
+					<h4>{title}</h4>
 					{links.map(({ text, url }) => (
-						<li key={text}>
+						<p key={text} data-text={text}>
 							<A href={url}>{text}</A>
-						</li>
+						</p>
 					))}
-				</ul>
+				</section>
 			))}
-			<div>
+			<div id="buttons">
 				<a href="">
 					<TransparentButton>
 						<Facebook />
@@ -57,40 +55,40 @@ const FooterBar = styled.div`
 	div {
 		margin: 2vh 0;
 	}
-	ul {
+	section {
 		margin: 2vh 0;
+		padding: 0;
 		font-size: 90%;
 		h4 {
 			margin: 2vh 0;
 		}
-		li {
-			line-height: 200%;
+		a {
+			line-height: 150%;
+			padding: .5vh 0;
+			border-bottom: 1px solid ${s.grey};
 		}
 	}
 	button {
-		margin: 1vh 2vw;
+		margin: 0 1.5vw 2vh;
 		padding: 0;
-		height: 50px;
-		width: 50px;
+		height: 3em;
+		width: 3em;
 		border-radius: 50%;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 	}
 	text-align: center;
-
 	@media (min-width: ${s.desktop}) {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr) auto;
 		padding: 2vh ${s.wPadding};
 		text-align: left;
-		ul {
+		section {
 			margin: 0;
-			li {
-				line-height: 150%;
-			}
 		}
 		button {
 			display: flex;
-			align-items: center;
-			justify-content: center;
 		}
 	}
 `;

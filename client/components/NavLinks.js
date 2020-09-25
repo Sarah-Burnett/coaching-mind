@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import * as s from "../styles/variables";
 import findComponent from "../utilities/findComponent";
@@ -36,13 +36,16 @@ const Links = styled.ul`
 	top: 12vh;
 	left: 0;
 	background: ${s.red};
-	height: 40vh;
+	height: 50vh;
 	width: 100vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
 	padding: 0;
+	button {
+		min-width: 100px;
+	}
 	@media (min-width: ${s.desktop}) {
 		position: static;
 		font-size: 80%;

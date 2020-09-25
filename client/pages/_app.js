@@ -12,11 +12,28 @@ export default function MyApp({ Component, pageProps }) {
 		role: null,
 		username: null,
 	});
+	const authProp = {
+		auth,
+		login: ({ jwt, role, username }) => {
+			setAuth({
+				isAuth: true,
+				jwt,
+				role,
+				username,
+			});
+		},
+		logout: () => setAuth({
+			isAuth: false,
+			jwt: null,
+			role: null,
+			username: null,
+		}),
+	};
 	return (
 		<div>
-			<Nav />
+			<Nav authProp={authProp}/>
 			<Main>
-				<Component {...pageProps} auth={auth} setAuth={setAuth} />
+				<Component {...pageProps} authProp={authProp} />
 			</Main>
 			<Footer />
 		</div>

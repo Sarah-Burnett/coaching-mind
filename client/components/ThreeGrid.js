@@ -24,5 +24,6 @@ const Grid = styled.div`
 		align-items: center;
 		justify-content: center;
 		grid-template-columns: repeat(3, minmax(325px, 1fr));
+		grid-column-gap: 4vh;
 	}
 `;

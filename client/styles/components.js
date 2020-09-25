@@ -84,4 +84,44 @@ export const Heading = styled.h1`
 export const Error = styled.div`
 	color: ${s.red};
 	font-size: 90%;
+	padding: 1vh 1vw;
+`;
+
+export const Paper = styled.section`
+	background: ${s.paper};
+	ul {
+		color: #555;
+		font-size: 22px;
+		padding: 0 !important;
+		width: 100%;
+		border: 1px solid #dedede;
+		margin: 0;
+	}
+	li {
+		list-style: none;
+		border-bottom: 1px dotted #ccc;
+		text-indent: 25px;
+		height: 2em;
+		padding: 0;
+		text-transform: capitalize;
+		&:hover {
+			background-color: #f0f0f0;
+			transition: all 0.2s;
+		}
+	}
+	div {
+		border-left: 1px solid ${s.red};
+		height: 2em;
+		margin: 0;
+		margin-left: 10vw;
+		display: flex;
+		align-items: center;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		h4 {
+			margin: 0;
+			padding: 0;
+		}
+	}
 `;

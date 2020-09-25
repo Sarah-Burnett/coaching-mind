@@ -5,6 +5,7 @@ export const purple = "#611958";
 export const grey = "#E7E7E7";
 export const white = "#FFF";
 export const black = "#363636";
+export const paper = "#f5f5f5";
 
 export const tablet = "500px";
 export const desktop = "850px";

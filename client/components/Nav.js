@@ -8,7 +8,7 @@ import { Menu, X } from "react-feather";
 import { A } from "../styles/components";
 import { useRouter } from "next/router";
 
-export default function Nav() {
+export default function Nav({authProp}) {
 	const [isMobNavOpen, setIsMobNavOpen] = useState(false);
 	const toggleMobNav = () => setIsMobNavOpen((prev) => !prev);
 	const router = useRouter();
@@ -20,7 +20,7 @@ export default function Nav() {
 				onClick={() => router.push("/")}
 			/>
 			<MediaQuery minDeviceWidth={s.desktop}>
-				<NavLinks />
+				<NavLinks authProp={authProp}/>
 			</MediaQuery>
 			<MediaQuery maxDeviceWidth={s.desktop}>
 				<CSSTransition

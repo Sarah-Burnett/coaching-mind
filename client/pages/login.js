@@ -4,7 +4,13 @@ import styled from "styled-components";
 import { FilledButton, Error } from "../styles/components";
 import * as s from "../styles/variables";
 
-export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
+export default function Login({
+	authProp: {
+		auth,
+		auth: { isAuth, role },
+		login,
+	},
+}) {
 	const router = useRouter();
 	const [formValues, setFormValues] = useState({
 		identifier: "",
@@ -24,7 +30,7 @@ export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
 			? data.map((item) => item.messages.map((item) => item.message))
 			: ["Error. Please try again."];
 	};
-	const login = async (event) => {
+	const loginUser = async (event) => {
 		event.preventDefault();
 		const res = await fetch("http://localhost:1337/auth/local", {
 			//TODO: remove hardcoded url
@@ -36,8 +42,7 @@ export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
 		});
 		const data = await res.json();
 		res.status === 200
-			? setAuth({
-					isAuth: true,
+			? login({
 					jwt: data.jwt,
 					role: data.user.role.type,
 					username: data.user.username,
@@ -52,7 +57,7 @@ export default function Login({ auth, auth: { isAuth, role }, setAuth }) {
 	}, []);
 	return (
 		<Section>
-			<Form onSubmit={login} noValidate>
+			<Form onSubmit={loginUser} noValidate>
 				<h3>Login</h3>
 				<Error>
 					{errors && errors.map((error) => <span key={error}>{error}</span>)}

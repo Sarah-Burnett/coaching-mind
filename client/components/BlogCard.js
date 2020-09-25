@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as s from "../styles/variables";
-import Moment from "react-moment";
+import { MonthDayYear } from "./Dates";
 
 export default function BlogCard({
 	item: { title, image, publishedAt, slug },
@@ -8,14 +8,15 @@ export default function BlogCard({
 	const url = `/blog/${slug}`;
 	return (
 		<Card>
-			<Img color="white"
+			<Img
+				color="white"
 				style={{ backgroundImage: `url(http://localhost:1337${image.url})` }}
 			/>
 			<a href={url}>
 				<h3>{title}</h3>
 			</a>
 			<p>
-				<Moment format="MMM Do YYYY">{publishedAt}</Moment>
+				<MonthDayYear date={publishedAt} />
 			</p>
 			<a href={url}>Read more →</a>
 		</Card>
@@ -23,9 +24,8 @@ export default function BlogCard({
 }
 
 const Card = styled.div`
-	max-width: 90vw;
-	padding: 2vh 2vw;
-	margin: 1vw;
+	width: 100%;
+	margin: 4vh 0;
 	a:hover {
 		opacity: 0.7;
 	}
@@ -38,11 +38,8 @@ const Card = styled.div`
 		color: ${s.red};
 	}
 	@media (max-width: ${s.desktop}) {
-		max-width: 30vw;
 		background: ${s.white};
 		border-radius: 15px;
-		padding: 3vh 3vw;
-		margin: 2vh;
 	}
 `;
 
