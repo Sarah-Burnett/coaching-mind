@@ -13,19 +13,28 @@ export default function Contact() {
 	const [errors, setErrors] = useState([]);
 	const submit = (event) => {
 		event.preventDefault();
-		setStatus("sending");
+		if (!formValues.name || !formValues.email || !formValues.message) return; //TODO: handle errors for these and add better email validation
+		if (!formValues.email.includes('@') || !formValues.email.includes('.')) return;
+		//TODO: check valid email
+		setStatus("send");
 		//TODO: submit contact form
+		setFormValues({
+			name: "",
+			email: "",
+			message: "",
+		});
+		setStatus("sent");
 	};
 	const handleChange = (event) => {
-        event.persist();
-        setErrors([]);
+		event.persist();
+		setErrors([]);
 		setFormValues((prev) => ({
 			...prev,
 			[event.target.id]: event.target.value,
 		}));
 	};
 	return (
-        <Form id="contact" onSubmit={submit} noValidate>
+		<Form id="contact" onSubmit={submit} noValidate>
 			<h1>Contact us</h1>
 			<Error>{errors && errors.map((error) => <span>{error}</span>)}</Error>
 			<div>
@@ -94,7 +103,7 @@ const Form = styled.form`
 			}
 		}
 		button {
-			width: 150px;
+			width: auto;
 		}
 	}
 `;

@@ -1,19 +1,27 @@
-import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import * as s from "../styles/variables";
 import findComponent from "../utilities/findComponent";
-import fetch from "../utilities/fetch";
 import { useRouter } from "next/router";
 
-export default function NavLinks({ toggleMobNav }) {
-	const [links, setLinks] = useState([]);
+export default function NavLinks({
+	toggleMobNav,
+	authProp: {
+		auth: { isAuth },
+		logout,
+	},
+}) {
 	const router = useRouter();
-	useEffect(() => fetch("/api/nav", setLinks), []);
 	return (
 		<Links onClick={toggleMobNav}>
 			{links.map(({ component, text, url }) => {
 				const Component = findComponent(component);
-				return (
+				return isAuth && text === "Login" ? (
+					<li key={text}>
+						<Component onClick={() => logout()} color={s.red}>
+							Logout
+						</Component>
+					</li>
+				) : (
 					<li key={text}>
 						<Component
 							href={url}
@@ -28,6 +36,34 @@ export default function NavLinks({ toggleMobNav }) {
 		</Links>
 	);
 }
+
+const links = [
+	{
+		text: "About",
+		component: "A",
+		url: "/about",
+	},
+	{
+		text: "Blog",
+		component: "A",
+		url: "/blog",
+	},
+	{
+		text: "Contact",
+		component: "A",
+		url: "/#contact",
+	},
+	{
+		text: "Login",
+		component: "A",
+		url: "/login",
+	},
+	{
+		text: "Join",
+		component: "TransparentButton",
+		url: "/#join",
+	},
+];
 
 const Links = styled.ul`
 	font-size: 80%;

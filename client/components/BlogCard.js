@@ -37,9 +37,8 @@ const Card = styled.div`
 	a:nth-child(4) {
 		color: ${s.red};
 	}
-	@media (max-width: ${s.desktop}) {
-		background: ${s.white};
-		border-radius: 15px;
+	@media(max-width: ${s.desktop}){
+		margin: 8vh 0;
 	}
 `;
 

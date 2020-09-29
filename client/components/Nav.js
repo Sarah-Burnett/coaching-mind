@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import * as s from "../styles/variables";
 import NavLinks from "./NavLinks";
-import MediaQuery from "react-responsive";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 import { Menu, X } from "react-feather";
 import { A } from "../styles/components";
 import { useRouter } from "next/router";
+import useWindowSize from "../utilities/useWindowSize";
 
-export default function Nav({authProp}) {
+export default function Nav({ authProp }) {
 	const [isMobNavOpen, setIsMobNavOpen] = useState(false);
 	const toggleMobNav = () => setIsMobNavOpen((prev) => !prev);
 	const router = useRouter();
+	const { width } = useWindowSize();
 	return (
 		<NavBar>
 			<img
@@ -19,20 +20,21 @@ export default function Nav({authProp}) {
 				alt="Coaching Mind"
 				onClick={() => router.push("/")}
 			/>
-			<MediaQuery minDeviceWidth={s.desktop}>
-				<NavLinks authProp={authProp}/>
-			</MediaQuery>
-			<MediaQuery maxDeviceWidth={s.desktop}>
-				<CSSTransition
-					in={isMobNavOpen}
-					timeout={1000}
-					classNames="fade"
-					unmountOnExit
-				>
-					<NavLinks toggleMobNav={toggleMobNav} />
-				</CSSTransition>
-				<A onClick={toggleMobNav}>{isMobNavOpen ? <X /> : <Menu />}</A>
-			</MediaQuery>
+			{width > parseInt(s.desktop) ? (
+				<NavLinks authProp={authProp} />
+			) : (
+				<>
+					<CSSTransition
+						in={isMobNavOpen}
+						timeout={1000}
+						classNames="fade"
+						unmountOnExit
+					>
+						<NavLinks toggleMobNav={toggleMobNav} authProp={authProp} />
+					</CSSTransition>
+					<A onClick={toggleMobNav}>{isMobNavOpen ? <X /> : <Menu />}</A>
+				</>
+			)}
 		</NavBar>
 	);
 }
@@ -48,6 +50,7 @@ const NavBar = styled.nav`
 	padding: 1vh ${s.wPadding};
 	img {
 		max-height: 100%;
+		cursor: pointer;
 	}
 	display: flex;
 	justify-content: space-between;

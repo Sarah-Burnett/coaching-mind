@@ -68,11 +68,11 @@ export default function Blog({ posts }) {
 	);
 }
 
-Blog.getInitialProps = async () => {
+export async function getStaticProps() {
 	const res = await fetch("http://localhost:1337/posts"); //TODO: edit this to .env
 	const posts = await res.json();
-	return { posts };
-};
+	return { props: { posts } };
+}
 
 const Wrapper = styled.div`
 	display: grid;

@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as s from "../styles/variables";
 import { A, TransparentButton } from "../styles/components";
-import fetch from "../utilities/fetch";
 import { Facebook, Twitter, Instagram, Linkedin } from "react-feather";
 
 export default function Footer() {
-	const [footerLinks, setFooterLinks] = useState([]);
-	useEffect(() => fetch("/api/footer", setFooterLinks), []);
 	return (
 		<FooterBar>
 			<div>&copy; 2020 Coaching Mind</div>
-			{footerLinks.map(({ title, links }) => (
+			{links.map(({ title, links }) => (
 				<section key={title}>
 					<h4>{title}</h4>
 					{links.map(({ text, url }) => (
@@ -47,6 +43,64 @@ export default function Footer() {
 	);
 }
 
+const links = [
+	{
+		title: "Info",
+		links: [
+			{
+				text: "Coaching",
+				url: "/coaching",
+			},
+			{
+				text: "Blog",
+				url: "/blog",
+			},
+			{
+				text: "FAQ",
+				url: "/faq",
+			},
+		],
+	},
+	{
+		title: "About",
+		links: [
+			{
+				text: "About us",
+				url: "/about",
+			},
+			{
+				text: "Our Team",
+				url: "/team",
+			},
+			{
+				text: "Our Coaches",
+				url: "/coaches",
+			},
+		],
+	},
+	{
+		title: "Action",
+		links: [
+			{
+				text: "Contact us",
+				url: "/#contact",
+			},
+			{
+				text: "Become a coach",
+				url: "/join/coach",
+			},
+			{
+				text: "Become a partner",
+				url: "/join/school",
+			},
+			{
+				text: "Vacancies",
+				url: "/careers",
+			},
+		],
+	},
+];
+
 const FooterBar = styled.div`
 	min-height: 40vh;
 	background: ${s.black};
@@ -64,7 +118,7 @@ const FooterBar = styled.div`
 		}
 		a {
 			line-height: 150%;
-			padding: .5vh 0;
+			padding: 0.5vh 0;
 			border-bottom: 1px solid ${s.grey};
 		}
 	}

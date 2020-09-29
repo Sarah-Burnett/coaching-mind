@@ -10,4 +10,5 @@ export const paper = "#f5f5f5";
 export const tablet = "500px";
 export const desktop = "850px";
 
+
 export const wPadding = "4vw";

@@ -16,7 +16,6 @@ export default function Coach({
 		} else router.replace("/login");
 	}, []);
 	const fetchCoach = async () => {
-		console.log("fetch");
 		const res = await fetch(
 			`http://localhost:1337/coaches?user.username=${username}`,
 			{
@@ -28,7 +27,6 @@ export default function Coach({
 		const coach = await res.json();
 		setCoach(coach[0]);
 	};
-	console.log(role);
 	return (
 		<>
 			<Heading color="blue">Coach</Heading>
