@@ -11,7 +11,7 @@ Public:
 Private:
 - Coach - display dynamic coach/coachee data, more to come... 
 
-## To do or more just brainstorming ideas at the moment
+## To do
 - Develop coach page - style existing, add in buttons to link to forms, add progress graph (e.g. recharts) etc.
 - Brush up styling / check fully responsive
 - Connect up contact form
