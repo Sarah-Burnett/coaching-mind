@@ -14,6 +14,7 @@ Private:
 ## To do
 - Develop coach page - style existing, add in buttons to link to forms, add progress graph (e.g. recharts) etc.
 - Brush up styling / check fully responsive
+- Page transitions
 - Connect up contact form
 - Decide how to store JWT to prevent re-login
 - Add forms to join/track coaching session progress
