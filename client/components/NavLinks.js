@@ -89,7 +89,7 @@ const Links = styled.ul`
 		justify-content: flex-end;
 		height: 15vh;
 		li {
-			padding: 1vh 1vw;
+			padding: 1vh 1.5vw;
 		}
 	}
 `;

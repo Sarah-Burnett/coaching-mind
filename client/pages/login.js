@@ -32,8 +32,7 @@ export default function Login({
 	};
 	const loginUser = async (event) => {
 		event.preventDefault();
-		const res = await fetch("http://localhost:1337/auth/local", {
-			//TODO: remove hardcoded url
+		const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/auth/local", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
