@@ -25,5 +25,16 @@ Private:
 ``` bash
 # See package.json for commands - next, strapi and concurrent dev option
 # Next on port 3000, strapi on port 1337
+
+
+
+```
+
+## Deploying 
+``` bash
+# Strapi deployed on heroku with pg add-on: coaching-mind-strapi
+# Push strapi to heroku using subtree
+git subtree push --prefix strapi heroku master
+
 ```
 
