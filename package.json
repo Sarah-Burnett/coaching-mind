@@ -8,7 +8,8 @@
     "client": "npm run dev --prefix client",
     "strapi": "npm run develop --prefix strapi",
     "dev": "concurrently \"npm run strapi\" \"npm run client\"",
-    "heroku-postbuild": "npm run build --prefix strapi"
+    "build": "npm run develop --prefix strapi",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,8 @@
   },
   "homepage": "https://github.com/Sarah-Burnett/coaching-mind#readme",
   "dependencies": {
-    "concurrently": "^5.3.0"
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "pg": "^8.4.1"
   }
 }
