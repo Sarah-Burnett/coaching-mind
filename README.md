@@ -12,6 +12,7 @@ Private:
 - Coach - display dynamic coach/coachee data, more to come... 
 
 ## To do
+- Sort blog posts date order
 - Develop coach page - style existing, add in buttons to link to forms, add progress graph (e.g. recharts) etc.
 - Brush up styling / check fully responsive
 - Page transitions

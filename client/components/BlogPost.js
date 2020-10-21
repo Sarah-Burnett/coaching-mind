@@ -8,14 +8,9 @@ export default function BlogPost({ post: { title, image, body } }) {
 		<>
 			<Heading color="blue">{title}</Heading>
 			<Layout>
-				<ReactMarkdown
-					source={body}
-					transformImageUri={(input) => `http://localhost:1337${input}`}
-				/>
+				<ReactMarkdown source={body} />
 			</Layout>
-			<Img
-				style={{ backgroundImage: `url(http://localhost:1337${image.url})` }}
-			/>
+			<Img style={{ backgroundImage: `url(${image.url})` }} />
 		</>
 	);
 }

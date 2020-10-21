@@ -50,3 +50,5 @@ strapi/.node_history
 strapi/.tmp
 
 /node_modules
+
+latest.dump

@@ -10,7 +10,7 @@ export default function BlogCard({
 		<Card>
 			<Img
 				color="white"
-				style={{ backgroundImage: `url(http://localhost:1337${image.url})` }}
+				style={{ backgroundImage: `url(${image.url})` }}
 			/>
 			<a href={url}>
 				<h3>{title}</h3>
