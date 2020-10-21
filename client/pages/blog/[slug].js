@@ -8,7 +8,7 @@ export default function Post() {
 	const [post, setPost] = useState();
 	const { slug } = useRouter().query;
 	const fetchPost = async () => {
-		const res = await fetch(`http://localhost:1337/posts?slug=${slug}`);
+		const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/posts?slug=${slug}`);
 		const post = await res.json();
 		setPost(post[0]);
 	};

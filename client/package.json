@@ -22,6 +22,5 @@
 	},
 	"devDependencies": {
 		"babel-plugin-styled-components": "^1.8.0"
-	},
-	"proxy": "localhost:1337"
+	}
 }
