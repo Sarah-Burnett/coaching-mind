@@ -69,20 +69,24 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-	const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/posts");
+	const res = await fetch(
+		process.env.NEXT_PUBLIC_STRAPI_URL + "/posts?_sort=publishedAt:DESC"
+	);
 	const posts = await res.json();
 	return { props: { posts } };
 }
 
 const Wrapper = styled.div`
-	display: grid;
-	align-items: center;
-	justify-content: center;
-	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-	grid-column-gap: 4vh;
 	color: ${s.blue};
 	padding: 0 ${s.wPadding};
 	margin-bottom: 4vh;
+	@media (min-width: 350px) {
+		display: grid;
+		align-items: center;
+		justify-content: center;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		grid-column-gap: 4vh;
+	}
 `;
 
 const SearchBar = styled.form`

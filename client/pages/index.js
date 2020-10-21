@@ -21,7 +21,7 @@ export default function Index({ posts, index }) {
 					Component={BlogCard}
 				/>
 			)}
-			<Contact/>
+			<Contact />
 		</>
 	);
 }
@@ -29,7 +29,10 @@ export default function Index({ posts, index }) {
 export async function getStaticProps() {
 	const indexJson = await fetch("http://localhost:3000/api/home"); //TODO: remove hardcoded urls
 	const index = await indexJson.json();
-	const postsJson = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/posts");
+	const postsJson = await fetch(
+		process.env.NEXT_PUBLIC_STRAPI_URL +
+			"/posts?_limit=3&_sort=publishedAt:DESC"
+	);
 	const posts = await postsJson.json();
 	return { props: { posts, index } };
-};
+}
