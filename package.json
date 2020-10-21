@@ -8,7 +8,7 @@
     "client": "npm run dev --prefix client",
     "strapi": "npm run develop --prefix strapi",
     "dev": "concurrently \"npm run strapi\" \"npm run client\"",
-    "build": "npm run develop --prefix strapi"
+    "build-client": "npm run build --prefix client"
   },
   "repository": {
     "type": "git",
