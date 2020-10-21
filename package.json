@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-client": "npm install --prefix client",
+    "install-strapi": "npm install --prefix strapi",
     "client": "npm run dev --prefix client",
     "strapi": "npm run develop --prefix strapi",
     "dev": "concurrently \"npm run strapi\" \"npm run client\"",

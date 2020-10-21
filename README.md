@@ -1,41 +1,76 @@
 # Coaching Mind
 
-> New React project to investigate Next.js and Strapi. Inspired by volunteer work with coaching enterprise, built landing page and blog and intending to build out coaching management system (i.e. information, surveys and graphs to track progress) to make that process more efficient.
+> New React project to investigate Next.js and Strapi. Inspired by volunteer work with coaching enterprise, built landing page and blog. Intending to build out coaching management system for coach/coachee/staff with information and surveys to feedback progress.
 
-## In progress
 Public:
 - Index - landing page with reusable components and blog section integrating strapi blog
 - Blog - integrating with strapi api and using dynamic routing for indiviual pages
-- Login - strapi authentication (jwt) which upon success redirects to relevant user page (coach/coachee/user)
+- Login - strapi authentication (jwt) which upon success redirects to relevant user page (coach only at present)
 
 Private:
-- Coach - display dynamic coach/coachee data, more to come... 
+- Coach - display dynamic data about current coaching programme
 
 ## To do
-- Sort blog posts date order
-- Develop coach page - style existing, add in buttons to link to forms, add progress graph (e.g. recharts) etc.
-- Brush up styling / check fully responsive
+- Brush up existing styling / check fully responsive
 - Page transitions
 - Connect up contact form
-- Decide how to store JWT to prevent re-login
+- Store JWT to prevent re-login
+- Develop coach page - add components to link to forms/info.
 - Add forms to join/track coaching session progress
-- Add coachee/staff pages
-- Maybe do other public pages (e.g. faq)
+- Add coachee/staff page
+- Other public pages (e.g. faq)
+- Testing
 
 ## Installation
+Root directory
 ``` bash
-# See package.json for commands - next, strapi and concurrent dev option
-# Next on port 3000, strapi on port 1337
+# install dependencies
+npm install
 
+# see separate details below for /strapi and /client
+```
+Strapi with Postgres
+``` bash
+#  install
+npm install-strapi
 
+# start dev strapi server
+npm run strapi
+
+# concurrent dev server with client
+npm run dev
+
+# Environmnent variables - postgres credentials, AWS S3
+DATABASE_PORT
+DATABASE_NAME
+DATABASE_USERNAME
+DATABASE_PASSWORD
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+
+# Runs on port 1337
+
+```
+NEXT.JS Client
+``` bash
+#  install
+npm install-client
+
+# start dev strapi server
+npm run client
+
+# concurrent dev server with strapi
+npm run dev
+
+# Environmnent variables - strapi url
+NEXT_PUBLIC_STRAPI_URL
+
+# Runs on port 3000
 
 ```
 
-## Deploying 
-``` bash
-# Strapi deployed on heroku with pg add-on: coaching-mind-strapi
-# Push strapi to heroku using subtree
+<!-- 
+Deploying heroku command: 
 git subtree push --prefix strapi heroku master
-
-```
+``` -->
 
