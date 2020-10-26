@@ -31,7 +31,7 @@ export default function Blog({ posts }) {
 	return (
 		<>
 			<Head>
-				<title>Blog</title>
+				<title>Blog | Coaching Mind</title>
 			</Head>
 			<Heading color="purple">Blog</Heading>
 			<SearchBar onSubmit={applySearch}>

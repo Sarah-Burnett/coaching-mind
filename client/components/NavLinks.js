@@ -61,7 +61,7 @@ const links = [
 	{
 		text: "Join",
 		component: "TransparentButton",
-		url: "/#join",
+		url: "/join",
 	},
 ];
 

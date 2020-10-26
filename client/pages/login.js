@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { FilledButton, Error } from "../styles/components";
 import * as s from "../styles/variables";
+import Head from "next/head";
 
 export default function Login({
 	authProp: {
@@ -17,6 +18,7 @@ export default function Login({
 		password: "",
 	});
 	const [errors, setErrors] = useState();
+	const [isSending, setIsSending] = useState(false);
 	const handleChange = (event) => {
 		event.persist();
 		setErrors();
@@ -32,13 +34,17 @@ export default function Login({
 	};
 	const loginUser = async (event) => {
 		event.preventDefault();
-		const res = await fetch(process.env.NEXT_PUBLIC_STRAPI_URL + "/auth/local", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(formValues),
-		});
+		setIsSending(true);
+		const res = await fetch(
+			process.env.NEXT_PUBLIC_STRAPI_URL + "/auth/local",
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formValues),
+			}
+		);
 		const data = await res.json();
 		res.status === 200
 			? login({
@@ -47,6 +53,7 @@ export default function Login({
 					username: data.user.username,
 			  })
 			: setErrors(() => getErrors(data.data));
+		setIsSending(false);
 	};
 	useEffect(() => {
 		if (isAuth) router.replace(`./${role}`);
@@ -55,32 +62,45 @@ export default function Login({
 		router.prefetch("/coach");
 	}, []);
 	return (
-		<Section>
-			<Form onSubmit={loginUser} noValidate>
-				<h3>Login</h3>
-				<Error>
-					{errors && errors.map((error) => <span key={error}>{error}</span>)}
-				</Error>
-				<label htmlFor="identifier">Username or Email</label>
-				<input
-					id="identifier"
-					value={formValues.identifier}
-					onChange={handleChange}
-					required
-					placeholder="Username or Email"
-				/>
-				<label htmlFor="password">Password</label>
-				<input
-					type="password"
-					id="password"
-					value={formValues.password}
-					onChange={handleChange}
-					placeholder="Password"
-					required
-				/>
-				<FilledButton color="purple">Login</FilledButton>
-			</Form>
-		</Section>
+		<>
+			<Head>
+				<title>Login | Coaching Mind</title>
+			</Head>
+			<Section>
+				<Form onSubmit={loginUser} noValidate>
+					<h3>Login</h3>
+					<Error>
+						{errors && errors.map((error) => <span key={error}>{error}</span>)}
+					</Error>
+					<label htmlFor="identifier">Username or Email</label>
+					<input
+						id="identifier"
+						value={formValues.identifier}
+						onChange={handleChange}
+						required
+						placeholder="Username or Email"
+					/>
+					<label htmlFor="password">Password</label>
+					<input
+						type="password"
+						id="password"
+						value={formValues.password}
+						onChange={handleChange}
+						placeholder="Password"
+						required
+					/>
+					<div>
+						{isSending ? (
+							<FilledButton disabled color="purple">
+								Logging in...
+							</FilledButton>
+						) : (
+							<FilledButton color="purple">Login</FilledButton>
+						)}
+					</div>
+				</Form>
+			</Section>
+		</>
 	);
 }
 

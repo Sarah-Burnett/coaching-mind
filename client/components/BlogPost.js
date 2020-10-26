@@ -23,4 +23,11 @@ const Layout = styled.article`
 			color: ${s.red};
 		}
 	}
+	img {
+		max-width: 100%;
+		max-height: 70vh;
+		/* margin: auto;	
+		display: block; */
+		float: right;
+	}
 `;

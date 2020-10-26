@@ -1,14 +1,15 @@
 import Head from "next/head";
 import findComponent from "../utilities/findComponent";
-import BlogCard from "../components/BlogCard";
-import ThreeGrid from "../components/ThreeGrid";
-import Contact from "../components/Contact";
+import dynamic from "next/dynamic";
+const BlogCard = dynamic(() => import("../components/BlogCard"));
+const ThreeGrid = dynamic(() => import("../components/ThreeGrid"));
+const Contact = dynamic(() => import("../components/Contact"));
 
 export default function Index({ posts }) {
 	return (
 		<>
 			<Head>
-				<title>Coaching Mind</title>
+				<title>Home | Coaching Mind</title>
 			</Head>
 			{index.map(({ component, props }, index) => {
 				const Component = findComponent(component);
@@ -39,7 +40,10 @@ const index = [
 	{
 		component: "FullImg",
 		props: {
-			img: ["/virtual-learning.jpg", "/virtual-learning-mob.jpg"],
+			img: [
+				"https://coaching-mind.s3.eu-west-2.amazonaws.com/virtual_learning_8dc9b94e43.jpg",
+				"https://coaching-mind.s3.eu-west-2.amazonaws.com/virtual_learning_mob_94c1b711cb.jpg",
+			],
 			text: {
 				heading: "Our new virtual coaching platform",
 				p:
@@ -48,6 +52,7 @@ const index = [
 					"corporis fugiat deserunt numquam. Explicabo, repellat aut?",
 				button: "Become a virtual coach",
 			},
+			link: "/join",
 		},
 	},
 	{
@@ -62,7 +67,8 @@ const index = [
 	{
 		component: "TwoGrid",
 		props: {
-			img: "/primary.jpg",
+			img:
+				"https://coaching-mind.s3.eu-west-2.amazonaws.com/primary_kid_at_desk_34af8e36df.jpg",
 			text: {
 				heading: "Coaching in Primary Schools",
 				p:
@@ -78,7 +84,8 @@ const index = [
 		component: "TwoGrid",
 		props: {
 			reverse: true,
-			img: "/secondary.jpg",
+			img:
+				"https://coaching-mind.s3.eu-west-2.amazonaws.com/secondary_kids_at_laptop_78108e4071.jpg",
 			text: {
 				heading: "Coaching in Secondary Schools",
 				p:
@@ -93,7 +100,8 @@ const index = [
 	{
 		component: "TwoGrid",
 		props: {
-			img: "/workplace.jpg",
+			img:
+				"https://coaching-mind.s3.eu-west-2.amazonaws.com/work_meeting_ae235dbb2d.jpg",
 			text: {
 				heading: "Coaching in the Workplace",
 				p:

@@ -1,7 +1,15 @@
 import BlogPost from "../../components/BlogPost";
+import Head from "next/head";
 
 export default function Post({ post }) {
-	return <BlogPost post={post} />;
+	return (
+		<>
+			<Head>
+				<title>{post.title} | Coaching Mind</title>
+			</Head>
+			<BlogPost post={post} />
+		</>
+	);
 }
 
 export async function getStaticPaths() {

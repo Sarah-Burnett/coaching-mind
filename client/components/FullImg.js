@@ -4,7 +4,7 @@ import { FilledButton, Img } from "../styles/components";
 import * as s from "../styles/variables";
 import useWindowSize from "../utilities/useWindowSize";
 
-export default function FullImg({ img, text, click, color }) {
+export default function FullImg({ img, text, click, link = "/" }) {
 	const { width } = useWindowSize();
 	const setBackgroundImage = (size) => {
 		let index = 1;
@@ -20,7 +20,7 @@ export default function FullImg({ img, text, click, color }) {
 			<h4>{text.p}</h4>
 			<p>
 				<FilledButton onClick={click} color="black">
-					{text.button}
+					<a href={link}>{text.button}</a>
 				</FilledButton>
 			</p>
 		</FullImage>

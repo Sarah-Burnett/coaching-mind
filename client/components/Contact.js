@@ -9,21 +9,35 @@ export default function Contact() {
 		email: "",
 		message: "",
 	});
-	const [status, setStatus] = useState("pending");
-	const [errors, setErrors] = useState([]);
-	const submit = (event) => {
+	const [isSending, setIsSending] = useState(false);
+	const [isSent, setIsSent] = useState(false);
+	const [errors, setErrors] = useState("");
+	const submit = async (event) => {
 		event.preventDefault();
-		if (!formValues.name || !formValues.email || !formValues.message) return; //TODO: handle errors for these and add better email validation
-		if (!formValues.email.includes('@') || !formValues.email.includes('.')) return;
-		//TODO: check valid email
-		setStatus("send");
-		//TODO: submit contact form
-		setFormValues({
-			name: "",
-			email: "",
-			message: "",
+		const form = event.target;
+		if (!formValues.name || !formValues.email || !formValues.message)
+			return setErrors("Please fill in all fields");
+		//TODO: handle errors for these and add better email validation
+		if (!formValues.email.includes("@") || !formValues.email.includes("."))
+			return setErrors("Please add a valid email address");
+		setIsSending(true);
+		console.log(formValues);
+		const res = await fetch(form.action, {
+			method: form.method,
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formValues),
 		});
-		setStatus("sent");
+		if (res.status === 200) {
+			setFormValues({
+				name: "",
+				email: "",
+				message: "",
+			});
+			setIsSent(true);
+		} else setErrors("Sorry! Form did not submit. Please try again");
+		setIsSending(false);
 	};
 	const handleChange = (event) => {
 		event.persist();
@@ -34,42 +48,58 @@ export default function Contact() {
 		}));
 	};
 	return (
-		<Form id="contact" onSubmit={submit} noValidate>
+		<Form
+			id="contact"
+			onSubmit={submit}
+			noValidate
+			method="POST"
+			action="https://formspree.io/f/xvovajbn"
+		>
 			<h1>Contact us</h1>
-			<Error>{errors && errors.map((error) => <span>{error}</span>)}</Error>
-			<div>
-				<input
-					id="name"
-					placeholder="Name"
-					value={formValues.name}
-					onChange={handleChange}
-					required
-				/>
-				<input
-					id="email"
-					placeholder="Email"
-					value={formValues.email}
-					onChange={handleChange}
-					type="email"
-					required
-				/>
-			</div>
-			<textarea
-				id="message"
-				placeholder="Message..."
-				value={formValues.message}
-				onChange={handleChange}
-				required
-			/>
-			<div>
-				{status === "pending" ? (
-					<FilledButton color="blue">Send</FilledButton>
-				) : (
-					<FilledButton disabled color="blue">
-						{status === "sending" ? "Sending..." : "Sent"}
-					</FilledButton>
-				)}
-			</div>
+			<Error>{errors && <span>{errors}</span>}</Error>
+			{isSent ? (
+				<div id="success">
+					<p>Your message has sent</p>
+					<p>Thank you for contacting us</p>
+					<p>We will be in touch ASAP within 2 working days</p>
+				</div>
+			) : (
+				<>
+					<div>
+						<input
+							id="name"
+							placeholder="Name"
+							value={formValues.name}
+							onChange={handleChange}
+							required
+						/>
+						<input
+							id="email"
+							placeholder="Email"
+							value={formValues.email}
+							onChange={handleChange}
+							type="email"
+							required
+						/>
+					</div>
+					<textarea
+						id="message"
+						placeholder="Message..."
+						value={formValues.message}
+						onChange={handleChange}
+						required
+					/>
+					<div>
+						{isSending ? (
+							<FilledButton disabled color="blue">
+								Sending...
+							</FilledButton>
+						) : (
+							<FilledButton color="blue">Send</FilledButton>
+						)}
+					</div>
+				</>
+			)}
 		</Form>
 	);
 }
@@ -105,5 +135,9 @@ const Form = styled.form`
 		button {
 			width: auto;
 		}
+	}
+	#success {
+		display: block;
+		text-align: center;
 	}
 `;

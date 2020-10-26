@@ -85,6 +85,8 @@ export const Error = styled.div`
 	color: ${s.red};
 	font-size: 90%;
 	padding: 1vh 1vw;
+	margin-bottom: 2vh;
+	min-height: 1.5em;
 `;
 
 export const Paper = styled.section`

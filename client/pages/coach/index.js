@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Heading, Paper } from "../../styles/components";
 import { DayTime, MonthDayYear } from "../../components/Dates";
+import Head from "next/head";
 
 export default function Coach({
 	authProp: {
@@ -29,6 +30,9 @@ export default function Coach({
 	};
 	return (
 		<>
+			<Head>
+				<title>Coach | Coaching Mind</title>
+			</Head>
 			<Heading color="blue">Coach</Heading>
 			{coach && (
 				<Paper>
