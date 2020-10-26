@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FilledButton, Error } from "../styles/components";
 import * as s from "../styles/variables";
 import Head from "next/head";
+import fetch from "../utilities/fetch";
 
 export default function Login({
 	authProp: {
@@ -32,27 +33,26 @@ export default function Login({
 			? data.map((item) => item.messages.map((item) => item.message))
 			: ["Error. Please try again."];
 	};
+	const showLoginSuccess = (data) => {
+		login({
+			jwt: data.jwt,
+			role: data.user.role.type,
+			username: data.user.username,
+		});
+	};
+	const showLoginFailure = (data) => {
+		setErrors(() => getErrors(data.data));
+	};
 	const loginUser = async (event) => {
 		event.preventDefault();
 		setIsSending(true);
-		const res = await fetch(
-			process.env.NEXT_PUBLIC_STRAPI_URL + "/auth/local",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formValues),
-			}
-		);
-		const data = await res.json();
-		res.status === 200
-			? login({
-					jwt: data.jwt,
-					role: data.user.role.type,
-					username: data.user.username,
-			  })
-			: setErrors(() => getErrors(data.data));
+		await fetch({
+			url: process.env.NEXT_PUBLIC_STRAPI_URL + "/auth/local",
+			method: "POST",
+			body: JSON.stringify(formValues),
+			resolve: showLoginSuccess,
+			reject: showLoginFailure,
+		});
 		setIsSending(false);
 	};
 	useEffect(() => {

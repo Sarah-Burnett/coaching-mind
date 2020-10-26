@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import * as s from "../styles/variables";
 import { FilledButton, Error } from "../styles/components";
+import fetch from "../utilities/fetch";
 
 export default function Contact() {
 	const [formValues, setFormValues] = useState({
@@ -12,6 +13,17 @@ export default function Contact() {
 	const [isSending, setIsSending] = useState(false);
 	const [isSent, setIsSent] = useState(false);
 	const [errors, setErrors] = useState("");
+	const showSubmitSuccess = () => {
+		setFormValues({
+			name: "",
+			email: "",
+			message: "",
+		});
+		setIsSent(true);
+	};
+	const showSubmitFailure = () => {
+		setErrors("Sorry! Form did not submit. Please try again");
+	};
 	const submit = async (event) => {
 		event.preventDefault();
 		const form = event.target;
@@ -21,23 +33,13 @@ export default function Contact() {
 		if (!formValues.email.includes("@") || !formValues.email.includes("."))
 			return setErrors("Please add a valid email address");
 		setIsSending(true);
-		console.log(formValues);
-		const res = await fetch(form.action, {
-			method: form.method,
-			headers: {
-				"Content-Type": "application/json",
-			},
+		return fetch({
+			url: form.action,
+			method: "POST",
 			body: JSON.stringify(formValues),
+			resolve: showSubmitSuccess,
+			reject: showSubmitFailure,
 		});
-		if (res.status === 200) {
-			setFormValues({
-				name: "",
-				email: "",
-				message: "",
-			});
-			setIsSent(true);
-		} else setErrors("Sorry! Form did not submit. Please try again");
-		setIsSending(false);
 	};
 	const handleChange = (event) => {
 		event.persist();
