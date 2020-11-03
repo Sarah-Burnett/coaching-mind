@@ -86,12 +86,12 @@ const links = [
 				url: "/#contact",
 			},
 			{
-				text: "Become a coach",
-				url: "/join/coach",
+				text: "Join us",
+				url: "/join",
 			},
 			{
-				text: "Become a partner",
-				url: "/join/school",
+				text: "Shop",
+				url: "/shop",
 			},
 			{
 				text: "Vacancies",

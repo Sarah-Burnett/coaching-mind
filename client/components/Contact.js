@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import * as s from "../styles/variables";
-import { FilledButton, Error } from "../styles/components";
+import { FilledButton } from "../styles/components";
 import fetch from "../utilities/fetch";
+import Error from "./Error";
+import { useTransition, animated } from "react-spring";
 
 export default function Contact() {
 	const [formValues, setFormValues] = useState({
@@ -12,7 +14,7 @@ export default function Contact() {
 	});
 	const [isSending, setIsSending] = useState(false);
 	const [isSent, setIsSent] = useState(false);
-	const [errors, setErrors] = useState("");
+	const [errors, setErrors] = useState([]);
 	const showSubmitSuccess = () => {
 		setFormValues({
 			name: "",
@@ -22,16 +24,17 @@ export default function Contact() {
 		setIsSent(true);
 	};
 	const showSubmitFailure = () => {
-		setErrors("Sorry! Form did not submit. Please try again");
+		setErrors(["Sorry! Form did not submit. Please try again"]);
 	};
 	const submit = async (event) => {
 		event.preventDefault();
+		setErrors([]);
 		const form = event.target;
 		if (!formValues.name || !formValues.email || !formValues.message)
-			return setErrors("Please fill in all fields");
+			return setErrors(["Please fill in all fields"]);
 		//TODO: handle errors for these and add better email validation
 		if (!formValues.email.includes("@") || !formValues.email.includes("."))
-			return setErrors("Please add a valid email address");
+			return setErrors(["Please add a valid email address"]);
 		setIsSending(true);
 		return fetch({
 			url: form.action,
@@ -49,6 +52,11 @@ export default function Contact() {
 			[event.target.id]: event.target.value,
 		}));
 	};
+	const errorTransitions = useTransition(errors, null, {
+		from: { height: 0, opacity: 0 },
+		enter: { height: "auto", opacity: 1 },
+		leave: [{ opacity: 0 }, { height: 0 }],
+	});
 	return (
 		<Form
 			id="contact"
@@ -58,7 +66,14 @@ export default function Contact() {
 			action="https://formspree.io/f/xvovajbn"
 		>
 			<h1>Contact us</h1>
-			<Error>{errors && <span>{errors}</span>}</Error>
+			{errorTransitions.map(
+				({ item, key, props }) =>
+					item && (
+						<animated.div key={key} style={props}>
+							<Error errors={errors} />
+						</animated.div>
+					)
+			)}
 			{isSent ? (
 				<div id="success">
 					<p>Your message has sent</p>
