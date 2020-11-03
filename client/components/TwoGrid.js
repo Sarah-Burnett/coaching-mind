@@ -19,8 +19,10 @@ export default function TwoGrid({ reverse, text, img }) {
 }
 
 const Grid = styled.section`
+	height: 85vh;
 	div {
 		width: 100vw;
+		min-height: 50%;
 		color: ${s.white};
 		display: flex;
 		flex-direction: column;
@@ -30,16 +32,16 @@ const Grid = styled.section`
 		p {
 			width: 100%;
 		}
-		@media (min-width: ${s.tablet}) {
+		@media (min-width: ${s.desktop}) {
 			width: 50vw;
 		}
 	}
 	div:nth-child(2) {
 		padding: 2vh ${s.wPadding};
 	}
-	@media (min-width: ${s.tablet}) {
+	@media (min-width: ${s.desktop}) {
 		display: flex;
-		min-height: 85vh;
+		flex-direction: row;
 		justify-content: center;
 	}
 `;
