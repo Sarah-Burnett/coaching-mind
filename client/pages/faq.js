@@ -5,35 +5,77 @@ import FAQ from "../components/FAQ";
 
 export default function faq() {
 	return (
-		<div>
+		<>
 			<Heading color="blue">FAQ</Heading>
-			{questions.map((section) => (
-				<Section key={section}>
-					<Title>{section.title}</Title>
-					{section.questions.map((question) => (
-						<FAQ key={question} question={question} />
-					))}
-				</Section>
-			))}
-		</div>
+			<Buttons>
+				{questions.map(({ title, id }) => (
+					<a href={"#" + id}>
+						<img src="https://plchldr.co/i/250x250" alt="" />
+						{title}
+					</a>
+				))}
+			</Buttons>
+			<Questions>
+				{questions.map((section) => (
+					<Topic id={section.id} key={section.id}>
+						<Title>{section.title}</Title>
+						{section.questions.map((question) => (
+							<FAQ key={question} question={question} />
+						))}
+					</Topic>
+				))}
+			</Questions>
+		</>
 	);
 }
 
-const Section = styled.div`
-	width: 80%;
-	margin: 5vh auto;
+const Buttons = styled.div`
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	padding: 0 ${s.wPadding};
+	min-height: 45vh;
+	a {
+		width: 250px;
+		text-align: center;
+		padding: 30px;
+		margin: auto;
+		max-width: 100%;
+		font-size: smaller;
+	}
+	img {
+		border-radius: 50%;
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	@media (min-width: 600px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media (min-width: 1200px) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+`;
+
+const Questions = styled.section`
+    background: ${s.grey};
+`;
+
+const Topic = styled.div`
+	padding: 15vh ${s.wPadding} 0;
 `;
 
 const Title = styled.h2`
 	border-bottom: 1px solid ${s.black};
 	text-align: left;
 	line-height: 2;
-    color: ${s.blue};
+	color: ${s.blue};
+	padding-top: 2vh;
 `;
 
 const questions = [
 	{
 		title: "The basics",
+		id: "basics",
 		questions: [
 			{
 				q: "What is Coaching-Mind?",
@@ -67,6 +109,8 @@ const questions = [
 	},
 	{
 		title: "I have a problem",
+		id: "problem",
+
 		questions: [
 			{
 				q: "I cannot login",
@@ -93,6 +137,7 @@ const questions = [
 	},
 	{
 		title: "Want to partner with us",
+		id: "partner",
 		questions: [
 			{
 				q: "How do I get my school/workplace involved with this project",
@@ -126,6 +171,7 @@ const questions = [
 	},
 	{
 		title: "Want to join our team",
+		id: "join",
 		questions: [
 			{
 				q: "What job openings do you have?",

@@ -75,7 +75,8 @@ export const Img = styled.div`
 `;
 
 export const Heading = styled.h1`
-	padding: 3em;
+	height: 40vh;
+	line-height: 40vh;
 	background: ${(props) => (props.color ? s[props.color] : s.red)};
 	color: ${s.white};
 	margin: 0;

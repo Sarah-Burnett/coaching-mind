@@ -41,7 +41,7 @@ export default function FAQ({ question }) {
 }
 
 const Question = styled.div`
-	margin: 3vh 0;
+	margin: 5vh 0;
 	h3 {
         color: ${s.blue};
         font-size: smaller;
@@ -56,4 +56,8 @@ const Question = styled.div`
 			}
 		}
 	}
+    p {
+        line-height: 1.4;
+        padding: 2vh 0;
+    }
 `;
