@@ -3,7 +3,7 @@ import * as s from "../styles/variables";
 import NavLinks from "./NavLinks";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
-import { Menu, X } from "react-feather";
+import { Menu, ShoppingCart, X } from "react-feather";
 import { A } from "../styles/components";
 import { useRouter } from "next/router";
 import useWindowSize from "../utilities/useWindowSize";
@@ -12,6 +12,7 @@ export default function Nav({ authProp }) {
 	const [isMobNavOpen, setIsMobNavOpen] = useState(false);
 	const toggleMobNav = () => setIsMobNavOpen((prev) => !prev);
 	const router = useRouter();
+	const page = router.route;
 	const { width } = useWindowSize();
 	return (
 		<NavBar>
@@ -20,7 +21,9 @@ export default function Nav({ authProp }) {
 				alt="Coaching Mind"
 				onClick={() => router.push("/")}
 			/>
-			{width > parseInt(s.desktop) ? (
+			{router.route.includes("shop") ? (
+				<ShoppingCart />
+			) : width > parseInt(s.desktop) ? (
 				<NavLinks authProp={authProp} />
 			) : (
 				<>
@@ -56,4 +59,5 @@ const NavBar = styled.nav`
 	justify-content: space-between;
 	align-items: center;
 	font-weight: bold;
+	color: ${s.white};
 `;
