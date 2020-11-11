@@ -1,24 +1,24 @@
 # Coaching Mind
 
-> New React project to investigate Next.js and Strapi. Inspired by volunteer work with coaching enterprise, built landing page and blog. Intending to build out coaching management system for coach/coachee/staff with information and surveys to feedback progress.
+> New React project to investigate Next.js and Strapi. Inspired by volunteer work with coaching enterprise. Intending to build out coaching management system for coach/coachee/staff with information and surveys to feedback progress. Following pages built so far:
 
 Public:
 - Index - landing page with reusable components and blog section integrating strapi blog
 - Blog - integrating with strapi api and using dynamic routing for indiviual pages
 - Login - strapi authentication (jwt) which upon success redirects to relevant user page (coach only at present)
+- FAQ - faq page with collapsible questions
 
 Private:
 - Coach - display dynamic data about current coaching programme
 
 ## To do
+- E-commerce pages (started shop branch)
 - Brush up existing styling / check fully responsive
-- Page transitions
-- Connect up contact form
+- Check page transitions
 - Store JWT to prevent re-login
 - Develop coach page - add components to link to forms/info.
 - Add forms to join/track coaching session progress
 - Add coachee/staff page
-- Other public pages (e.g. faq)
 - Testing
 
 ## Installation
