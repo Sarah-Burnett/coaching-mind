@@ -11,16 +11,6 @@ Public:
 Private:
 - Coach - display dynamic data about current coaching programme
 
-## To do
-- E-commerce pages (started shop branch)
-- Brush up existing styling / check fully responsive
-- Check page transitions
-- Store JWT to prevent re-login
-- Develop coach page - add components to link to forms/info.
-- Add forms to join/track coaching session progress
-- Add coachee/staff page
-- Testing
-
 ## Installation
 Root directory
 ``` bash
