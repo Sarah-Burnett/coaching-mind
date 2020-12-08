@@ -8,27 +8,30 @@ import { useRouter } from "next/router";
 import useFadeTransition from "../utilities/useFadeTransition";
 import { AuthProvider } from "../context/AuthContext";
 import Login from "../components/Login";
+import { CartProvider } from "../context/CartContext";
 
 export default function MyApp({ Component, pageProps }) {
-	const router = useRouter();
-	const transitions = useFadeTransition(router.pathname);
-	return (
-		<AuthProvider>
-			<Login />
-			<Nav />
-			<Main>
-				{/* {transitions.map(({ props, key }) => (
+  const router = useRouter();
+  const transitions = useFadeTransition(router.pathname);
+  return (
+    <AuthProvider>
+      <CartProvider>
+        <Login />
+        <Nav />
+        <Main>
+          {/* {transitions.map(({ props, key }) => (
 					<animated.div style={props} key={key}> */}
-						<Component {...pageProps}/>
-					{/* </animated.div> */}
-				{/* ))} */}
-			</Main>
-			<Footer />
-		</AuthProvider>
-	);
+          <Component {...pageProps} />
+          {/* </animated.div> */}
+          {/* ))} */}
+        </Main>
+        <Footer />
+      </CartProvider>
+    </AuthProvider>
+  );
 }
 
 const Main = styled.main`
-	min-height: 70vh;
-	margin-top: 5vh;
+  min-height: 70vh;
+  margin-top: 5vh;
 `;

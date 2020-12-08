@@ -8,11 +8,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
-<<<<<<< HEAD
 		"axios": "^0.21.0",
-=======
-		"date-fns": "^2.16.1",
->>>>>>> 97d7359 (updates)
 		"moment": "^2.27.0",
 		"next": "9.5.1",
 		"react": "16.13.1",
