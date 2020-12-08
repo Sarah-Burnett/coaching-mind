@@ -3,54 +3,28 @@ import "../styles/transitions.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import styled from "styled-components";
-import { useState } from "react";
-import { useTransition, animated } from "react-spring";
+import { animated } from "react-spring";
 import { useRouter } from "next/router";
+import useFadeTransition from "../utilities/useFadeTransition";
+import { AuthProvider } from "../context/AuthContext";
+import Login from "../components/Login";
 
 export default function MyApp({ Component, pageProps }) {
 	const router = useRouter();
-	console.log(router.pathname);
-	const [auth, setAuth] = useState({
-		isAuth: false,
-		jwt: null,
-		role: null,
-		username: null,
-	});
-	const authProp = {
-		auth,
-		login: ({ jwt, role, username }) => {
-			setAuth({
-				isAuth: true,
-				jwt,
-				role,
-				username,
-			});
-		},
-		logout: () =>
-			setAuth({
-				isAuth: false,
-				jwt: null,
-				role: null,
-				username: null,
-			}),
-	};
-	const transitions = useTransition(router.pathname, null, {
-		from: { opacity: 0 },
-		enter: { opacity: 1 },
-		leave: { opacity: 0 },
-	});
+	const transitions = useFadeTransition(router.pathname);
 	return (
-		<div>
-			<Nav authProp={authProp} />
+		<AuthProvider>
+			<Login />
+			<Nav />
 			<Main>
 				{/* {transitions.map(({ props, key }) => (
 					<animated.div style={props} key={key}> */}
-						<Component {...pageProps} authProp={authProp} />
+						<Component {...pageProps}/>
 					{/* </animated.div> */}
 				{/* ))} */}
 			</Main>
 			<Footer />
-		</div>
+		</AuthProvider>
 	);
 }
 

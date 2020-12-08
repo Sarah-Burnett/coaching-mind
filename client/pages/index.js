@@ -5,13 +5,7 @@ const BlogCard = dynamic(() => import("../components/BlogCard"));
 const ThreeGrid = dynamic(() => import("../components/ThreeGrid"));
 const Contact = dynamic(() => import("../components/Contact"));
 
-export default async function Index() {
-	const data = await fetch(
-		process.env.NEXT_PUBLIC_STRAPI_URL +
-			"/posts?_limit=3&_sort=publishedAt:DESC"
-	);
-	const posts = await data.json();
-	console.log(posts);
+export default function Index({ posts }) {
 	return (
 		<>
 			<Head>
@@ -33,14 +27,14 @@ export default async function Index() {
 	);
 }
 
-// export async function getStaticProps() {
-// 	const data = await fetch(
-// 		process.env.NEXT_PUBLIC_STRAPI_URL +
-// 			"/posts?_limit=3&_sort=publishedAt:DESC"
-// 	);
-// 	const posts = await data.json();
-// 	return { props: { posts } };
-// }
+export async function getStaticProps() {
+	const data = await fetch(
+		process.env.NEXT_PUBLIC_STRAPI_URL +
+			"/posts?_limit=3&_sort=publishedAt:DESC"
+	);
+	const posts = await data.json();
+	return { props: { posts } };
+}
 
 const index = [
 	{

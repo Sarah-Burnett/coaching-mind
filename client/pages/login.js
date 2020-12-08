@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { FilledButton, Heading } from "../styles/components";
+import { FilledButton } from "../styles/components";
 import * as s from "../styles/variables";
 import Head from "next/head";
 import request from "../utilities/request";
 import { useTransition, animated } from "react-spring";
 import Error from "../components/Error";
+import useAuth from "../utilities/useAuth";
+import useHeightTransition from "../utilities/useHeightTransition";
 
-export default function Login({
-  authProp: {
-    auth,
-    auth: { isAuth, role },
-    login,
-  },
-}) {
+export default function Login() {
+	const { auth, isAuth, role, login } = useAuth();
   const router = useRouter();
   const [formValues, setFormValues] = useState({
     identifier: "",
@@ -115,6 +112,7 @@ export default function Login({
     </>
   );
 }
+
 
 const Section = styled.section`
   background: ${s.purple};

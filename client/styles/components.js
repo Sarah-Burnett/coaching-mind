@@ -82,20 +82,22 @@ export const Heading = styled.h1`
 	margin: 0;
 `;
 
-export const Paper = styled.section`
+export const Paper = styled.div`
 	background: ${s.paper};
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
 	ul {
 		color: #555;
 		font-size: 22px;
 		padding: 0 !important;
-		width: 100%;
 		border: 1px solid #dedede;
 		margin: 0;
 	}
 	li {
 		list-style: none;
 		border-bottom: 1px dotted #ccc;
-		text-indent: 25px;
+		text-indent: 20px;
 		height: 2em;
 		padding: 0;
 		text-transform: capitalize;
@@ -103,20 +105,23 @@ export const Paper = styled.section`
 			background-color: #f0f0f0;
 			transition: all 0.2s;
 		}
+		@media (min-width: ${s.tablet}) {
+			text-indent: 25px;
+		}
 	}
 	div {
 		border-left: 1px solid ${s.red};
 		height: 2em;
 		margin: 0;
-		margin-left: 10vw;
+		margin-left: 2vw;
 		display: flex;
 		align-items: center;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
 		h4 {
 			margin: 0;
 			padding: 0;
+		}
+		@media (min-width: ${s.tablet}) {
+			margin-left: 8vw;
 		}
 	}
 `;
