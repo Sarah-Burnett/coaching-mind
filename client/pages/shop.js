@@ -1,17 +1,25 @@
+import Head from "next/head";
+import { Heading } from "../styles/components";
 import { productsQuery as query } from "../utilities/queries";
 
 export default function Shop({ products }) {
 	console.log(products[0].node.images);
 	return (
-		<div>
-			{products.map(({ node }) => (
-				<div key={node.id}>
-					<h1>{node.title}</h1>
-					<img src={node.images.edges[0].node.src} width="200" />
-					<p>{node.description}</p>
-				</div>
-			))}
-		</div>
+		<>
+			<Head>
+				<title>Shop | Coaching Mind</title>
+			</Head>
+			<Heading color="green">Shop</Heading>
+			<div>
+				{products.map(({ node }) => (
+					<div key={node.id}>
+						<h1>{node.title}</h1>
+						<img src={node.images.edges[0].node.src} width="200" />
+						<p>{node.description}</p>
+					</div>
+				))}
+			</div>
+		</>
 	);
 }
 

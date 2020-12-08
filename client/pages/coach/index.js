@@ -1,91 +1,110 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Heading, Paper } from "../../styles/components";
-import { DayTime, MonthDayYear } from "../../components/Dates";
+import { Heading } from "../../styles/components";
 import Head from "next/head";
+import Notepad from "../../components/Notepad";
+import findComponent from "../../utilities/findComponent";
+import { format } from "date-fns";
+import { useState, useEffect } from "react";
+import useAuth from "../../utilities/useAuth";
+import { useRouter } from "next/router";
+import Loading from "../../components/Loading";
+import styled from "styled-components";
 
-export default function Coach({
-	authProp: {
-		auth: { isAuth, jwt, username, role },
-	},
-}) {
-	const [coach, setCoach] = useState();
+export default function Coach() {
+	const [coach, setCoach] = useState(false);
+	const { auth, isAuth, loginFromCookie } = useAuth();
 	const router = useRouter();
-	useEffect(() => {
-		if (isAuth) {
-			role === "coach" ? fetchCoach() : router.replace(`/${role}`);
-		} else router.replace("/login");
-	}, []);
-	const fetchCoach = async () => {
-		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_STRAPI_URL}/coaches?user.username=${username}`,
+	const fetchCoach = async (user) => {
+		const response = await fetch(
+			`${process.env.NEXT_PUBLIC_STRAPI_URL}/coaches?user.username=${user.username}`,
 			{
 				headers: {
-					Authorization: `Bearer ${jwt}`,
+					Authorization: `Bearer ${user.jwt}`,
 				},
 			}
 		);
-		const coach = await res.json();
-		setCoach(coach[0]);
+		const data = await response.json();
+		setCoach({
+			Name: data[0].firstName,
+			Role: "Coach",
+			Coachee: data[0].coachee.firstName,
+			Programme: data[0].programme.name,
+			"First Session": format(
+				new Date(data[0].programme.firstSession),
+				"dd/MM/yy"
+			),
+			"Session Time": format(new Date(data[0].programme.firstSession), "HH:mm"),
+			Graduation: format(new Date(data[0].programme.gradDate), "dd/MM/yy"),
+		});
 	};
+	useEffect(() => {
+		if (!isAuth) {
+			const user = loginFromCookie();
+			if (!user) router.replace("/login");
+			else fetchCoach(user);
+		} else fetchCoach(auth);
+	}, []);
 	return (
 		<>
 			<Head>
 				<title>Coach | Coaching Mind</title>
 			</Head>
-			<Heading color="blue">Coach</Heading>
-			{coach && (
-				<Paper>
-					<ul>
-						<li>
-							<div></div>
-						</li>
-						<li>
-							<div>
-								<h4>Name:</h4>
-								<span>{coach.firstName}</span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h4>Role:</h4>
-								<span>{role}</span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h4>Coachee:</h4> <span>{coach.coachee.firstName}</span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h4>Programme:</h4> <span>{coach.programme.name}</span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<h4>First Session:</h4>
-								<MonthDayYear date={coach.programme.firstSession} />
-							</div>
-						</li>
-						<li>
-							<div>
-								<h4>Session time:</h4>
-								<DayTime date={coach.programme.firstSession} />
-							</div>
-						</li>
-						<li>
-							<div>
-								<h4>Graduation:</h4>
-								<MonthDayYear date={coach.programme.gradDate} />
-							</div>
-						</li>
-						<li>
-							<div></div>
-						</li>
-					</ul>
-				</Paper>
-			)}
+			<>
+				{coach && (
+					<>
+						<Heading color="blue"> Coach</Heading>
+						<Notepad props={coach}></Notepad>
+						{coachPage.map(({ component, props }, index) => {
+							const Component = findComponent(component);
+							return <Component key={index} {...props} />;
+						})}
+					</>
+				)}
+				{!coach && <Loading color="blue" />}
+			</>
 		</>
 	);
 }
+
+const coachPage = [
+	{
+		component: "TwoGrid",
+		props: {
+			img: "https://plchldr.co/i/400",
+			text: {
+				heading: "Report",
+				p:
+					"Fill out our feedback form to report how your coaching sessions are progressing",
+				button: "Report",
+				color: "green",
+			},
+			link: "/coach/report",
+		},
+	},
+	{
+		component: "TwoGrid",
+		props: {
+			img: "https://plchldr.co/i/339",
+			text: {
+				heading: "Read",
+				p: "Find out more about our programme and find tips in our blog",
+				button: "Read our blog",
+				color: "purple",
+			},
+			reverse: true,
+			link: "/blog",
+		},
+	},
+	{
+		component: "TwoGrid",
+		props: {
+			img: "https://plchldr.co/i/401",
+			text: {
+				heading: "Review",
+				p: "Review our coaching materials for inspiration for your sessions",
+				button: "Take me to materials",
+				color: "blue",
+			},
+			link: "https://www.dropbox.com/en_GB/?_hp=c",
+		},
+	},
+];

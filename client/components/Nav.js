@@ -12,7 +12,6 @@ export default function Nav({ authProp }) {
 	const [isMobNavOpen, setIsMobNavOpen] = useState(false);
 	const toggleMobNav = () => setIsMobNavOpen((prev) => !prev);
 	const router = useRouter();
-	const page = router.route;
 	const { width } = useWindowSize();
 	return (
 		<NavBar>
@@ -24,7 +23,7 @@ export default function Nav({ authProp }) {
 			{router.route.includes("shop") ? (
 				<ShoppingCart />
 			) : width > parseInt(s.desktop) ? (
-				<NavLinks authProp={authProp} />
+				<NavLinks/>
 			) : (
 				<>
 					<CSSTransition
@@ -33,7 +32,7 @@ export default function Nav({ authProp }) {
 						classNames="fade"
 						unmountOnExit
 					>
-						<NavLinks toggleMobNav={toggleMobNav} authProp={authProp} />
+						<NavLinks toggleMobNav={toggleMobNav}/>
 					</CSSTransition>
 					<A onClick={toggleMobNav}>{isMobNavOpen ? <X /> : <Menu />}</A>
 				</>

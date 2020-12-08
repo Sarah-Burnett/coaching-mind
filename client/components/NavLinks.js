@@ -2,26 +2,38 @@ import styled from "styled-components";
 import * as s from "../styles/variables";
 import findComponent from "../utilities/findComponent";
 import { useRouter } from "next/router";
+import useAuth from "../utilities/useAuth";
+import { TransparentButton } from "../styles/components";
 
-export default function NavLinks({
-	toggleMobNav,
-	authProp: {
-		auth: { isAuth },
-		logout,
-	},
-}) {
+function toTitleCase(str) {
+	let string = str[0].toUpperCase();
+	for (let i = 1; i < str.length; i++) {
+		string += str[i];
+	}
+	return string;
+}
+
+export default function NavLinks({ toggleMobNav }) {
 	const router = useRouter();
+	let { isAuth, role, logout } = useAuth();
 	return (
 		<Links onClick={toggleMobNav}>
 			{links.map(({ component, text, url }) => {
 				const Component = findComponent(component);
 				return isAuth && text === "Login" ? (
-					<li key={text}>
-						<Component onClick={() => logout()} color={s.red}>
-							Logout
-						</Component>
-					</li>
-				) : (
+					<>
+						<li key={text}>
+							<Component onClick={() => logout()} color={s.red}>
+								Logout
+							</Component>
+						</li>
+						<li key={role}>
+							<TransparentButton onClick={() => router.push(`/${role}`)}>
+								{toTitleCase(role)}
+							</TransparentButton>
+						</li>
+					</>
+				) : isAuth && text === "Join" ? null : (
 					<li key={text}>
 						<Component
 							href={url}

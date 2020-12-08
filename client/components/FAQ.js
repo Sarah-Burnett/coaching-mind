@@ -1,29 +1,26 @@
 import { useState } from "react";
-import { useTransition, animated } from "react-spring";
+import { animated } from "react-spring";
 import styled from "styled-components";
 import * as s from "../styles/variables";
+import useFadeTransition from "../utilities/useFadeTransition";
+import useHeightTransition from "../utilities/useHeightTransition";
 
 export default function FAQ({ question }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const faqTransitions = useTransition(isOpen, null, {
-		from: { height: 0, opacity: 0 },
-		enter: [{ height: "auto" }, { opacity: 1 }],
-		leave: [{ opacity: 0 }, { height: 0 }],
-		config: { duration: 150 },
-	});
-	const iconTransitions = useTransition(isOpen, null, {
-		from: { position: "absolute", opacity: 0 },
-		enter: { opacity: 1 },
-		leave: { opacity: 0 },
-	});
+	const faqTransitions = useHeightTransition(isOpen);
+	const iconTransitions = useFadeTransition(isOpen);
 	return (
 		<Question>
 			<h3 onClick={() => setIsOpen(() => !isOpen)}>
 				{iconTransitions.map(({ item, key, props }) =>
 					item ? (
-						<animated.span style={props}>-</animated.span>
+						<animated.span key={key} style={props}>
+							-
+						</animated.span>
 					) : (
-						<animated.span style={props}>+</animated.span>
+						<animated.span key={key} style={props}>
+							+
+						</animated.span>
 					)
 				)}
 				<span>{question.q}</span>
@@ -43,21 +40,24 @@ export default function FAQ({ question }) {
 const Question = styled.div`
 	margin: 5vh 0;
 	h3 {
-        color: ${s.blue};
-        font-size: smaller;
-        cursor: pointer;
+		color: ${s.blue};
+		font-size: smaller;
+		cursor: pointer;
 		span {
 			font-size: x-large;
-            text-align: center;
+			text-align: center;
 			&:last-child {
 				position: relative;
-                left: 25px;
-                text-align: left;
+				left: 25px;
+				text-align: left;
 			}
 		}
 	}
-    p {
-        line-height: 1.4;
-        padding: 2vh 0;
-    }
+	span {
+		position: absolute;
+	}
+	p {
+		line-height: 1.4;
+		padding: 2vh 0;
+	}
 `;

@@ -9,7 +9,7 @@ export default function faq() {
 			<Heading color="blue">FAQ</Heading>
 			<Buttons>
 				{questions.map(({ title, id }) => (
-					<a href={"#" + id}>
+					<a href={"#" + id} key={id}>
 						<img src="https://plchldr.co/i/250x250" alt="" />
 						{title}
 					</a>
@@ -57,7 +57,8 @@ const Buttons = styled.div`
 `;
 
 const Questions = styled.section`
-    background: ${s.grey};
+	background: ${s.grey};
+	padding-bottom: 5vh;
 `;
 
 const Topic = styled.div`

@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { FilledButton, Heading } from "../styles/components";
+import { FilledButton } from "../styles/components";
 import * as s from "../styles/variables";
 import Head from "next/head";
 import fetch from "../utilities/fetch";
-import { useTransition, animated } from "react-spring";
+import { animated } from "react-spring";
 import Error from "../components/Error";
+import useAuth from "../utilities/useAuth";
+import useHeightTransition from "../utilities/useHeightTransition";
 
-export default function Login({
-	authProp: {
-		auth,
-		auth: { isAuth, role },
-		login,
-	},
-}) {
+export default function Login() {
+	const { auth, isAuth, role, login } = useAuth();
 	const router = useRouter();
 	const [formValues, setFormValues] = useState({
 		identifier: "",
@@ -31,20 +28,18 @@ export default function Login({
 		}));
 	};
 	const getErrors = (data) => {
+		console.log(data);
 		return data
 			? data.map((item) => item.messages.map((item) => item.message))
 			: ["Error. Please try again."];
 	};
-	const showLoginSuccess = (data) => {
+	const showLoginSuccess = (data) =>
 		login({
 			jwt: data.jwt,
 			role: data.user.role.type,
 			username: data.user.username,
 		});
-	};
-	const showLoginFailure = (data) => {
-		setErrors(() => getErrors(data.data));
-	};
+	const showLoginFailure = (data) => setErrors(() => getErrors(data.data));
 	const loginUser = async (event) => {
 		event.preventDefault();
 		setIsSending(true);
@@ -57,17 +52,10 @@ export default function Login({
 		});
 		setIsSending(false);
 	};
-	const errorTransitions = useTransition(errors, null, {
-		from: { height: 0, opacity: 0 },
-		enter: { height: "auto", opacity: 1 },
-		leave: [{ opacity: 0 }, { height: 0 }],
-	});
+	const errorTransitions = useHeightTransition(errors);
 	useEffect(() => {
-		if (isAuth) router.replace(`./${role}`);
+		if (isAuth) router.replace(`/${role}`);
 	}, [auth]);
-	useEffect(() => {
-		router.prefetch("/coach");
-	}, []);
 	return (
 		<>
 			<Head>
@@ -101,7 +89,7 @@ export default function Login({
 						placeholder="Password"
 						required
 					/>
-					<div class="buttons">
+					<div className="buttons">
 						{isSending ? (
 							<FilledButton disabled color="purple">
 								Logging in...
@@ -115,6 +103,7 @@ export default function Login({
 		</>
 	);
 }
+
 
 const Section = styled.section`
 	background: ${s.purple};
