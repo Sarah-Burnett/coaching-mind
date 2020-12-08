@@ -4,7 +4,7 @@ import { AlertTriangle } from "react-feather";
 
 export default function Error({ errors }) {
 	return (
-		<ErrorBar class="errors">
+		<ErrorBar className="errors">
 			<AlertTriangle />
 			<div>
 				{errors.map((error) => (

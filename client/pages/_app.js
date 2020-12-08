@@ -43,11 +43,11 @@ export default function MyApp({ Component, pageProps }) {
 		<div>
 			<Nav authProp={authProp} />
 			<Main>
-				{transitions.map(({ props, key }) => (
-					<animated.div style={props} key={key}>
+				{/* {transitions.map(({ props, key }) => (
+					<animated.div style={props} key={key}> */}
 						<Component {...pageProps} authProp={authProp} />
-					</animated.div>
-				))}
+					{/* </animated.div> */}
+				{/* ))} */}
 			</Main>
 			<Footer />
 		</div>

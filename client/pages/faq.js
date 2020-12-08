@@ -57,7 +57,8 @@ const Buttons = styled.div`
 `;
 
 const Questions = styled.section`
-    background: ${s.grey};
+	background: ${s.grey};
+	padding-bottom: 5vh;
 `;
 
 const Topic = styled.div`
